@@ -1,0 +1,282 @@
+{% extends 'nav.html' %}
+{% load static %}
+
+{% block head %}
+<style>
+    .cartitemsdiv{
+        width: 100%;
+        height: auto;
+        padding: 40px;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        /* background-color: red; */
+    }
+
+    .divnames{
+        width: 470%;
+        padding: 0px 50px;
+    }
+
+    .divnames+div>a>button{
+        width: 120px;
+    }
+
+    .divnames>h4 , .divnames>h5{
+        width: fit-content;
+        text-align:start;
+        /* background-color: yellowgreen; */
+    }
+
+    .divnames>div{
+        width: 150px;
+        /* background-color: violet; */
+    }
+
+
+    .cartitemsdiv img{
+        width: 150px;
+        height: 170px;
+    }
+
+    .lastdiv{
+        width: 100%;
+        height: 10vh;
+        position: absolute;
+        bottom: 0px;
+        left: 0px;
+        right: 0px;
+    }
+
+    .alldivs{
+        width: 100%;
+        height: 100vh;
+        display:flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        /* background-color: aqua; */
+    }
+
+    .paymentform{
+        width: 60%;
+        height: 500px;
+        position: relative;
+        top: 8px;
+        /* background-color: rgba(206, 206, 206, 0.688); */
+        
+    }
+
+    .allitems{
+        width: 100%;
+        height: 500px;
+        overflow: scroll;
+        /* background-color: yellowgreen; */
+    }
+
+    .cartitemsdivallele{
+        width: 100%;
+        /* background-color: yellow; */
+        position: relative;
+        top: 35px;
+        padding: 50px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-evenly;
+    }
+</style>
+{% endblock head %}
+
+
+{% block body %}
+
+        <div class="alldivs">
+            
+            <div class="cartitemsdivallele">
+                <div class="allitems card card-body">
+                    {% if cartitems or onepluscartitem or samsungcartitem or redmicartitem or realmecartitem %}
+                    {% for i in cartitems %}
+                    <div class="cartitemsdiv">
+            
+                            <img src="{{i.appleproduct.Image.url}}" alt="">
+                            <div class="divnames">
+                                <h4>{{i.appleproduct.Name}}</h4>
+                                <h5>{{i.appleproduct.Cost}}  /- Rs</h5>
+                                <span style="color: rgb(13, 255, 0);">In stock</span>
+                                <p><span>Eligible for FREE Shipping</span></p>
+                                <div class="d-flex justify-content-evenly">
+                                    <a class="btn btn-danger" href="{% url 'APP:decrement' i.appleproduct.id %}" style="width: 30px; height: 30px;">-</a>{{i.quantity}}<a class="btn btn-primary" href="{% url 'APP:increment' i.appleproduct.id %}" style="width: 30px; height: 30px;">+</a>
+                                </div>
+                            </div>
+                            <div>
+                                <a href="{% url 'APP:removeitemcart' i.id %}"><button class="btn btn-danger">REMOVE</button></a>
+                            </div>
+                    </div>
+                    {% endfor %}
+            
+                    {% for i in onepluscartitem %}
+                    <div class="cartitemsdiv">
+            
+                            <img src="{{i.oneplusproduct.Image.url}}" alt="">
+                            <div class="divnames">
+                                <h4>{{i.oneplusproduct.Name}}</h4>
+                                <h5>{{i.oneplusproduct.Cost}}/- Rs</h5>
+                                <span style="color: rgb(13, 255, 0);">In stock</span>
+                                <p><span>Eligible for FREE Shipping</span></p>
+                                <div class="d-flex justify-content-evenly">
+                                    <a class="btn btn-danger" href="{% url 'APP:oneplusdecrement' i.oneplusproduct.id %}" style="width: 30px; height: 30px;">-</a>{{i.quantity}}<a class="btn btn-primary" href="{% url 'APP:oneplusincrement' i.oneplusproduct.id %}" style="width: 30px; height: 30px;">+</a>
+                                </div>
+                                
+                            </div>
+                            <div>
+                                <a href="{% url 'APP:oneplusremoveitemcart' i.id %}"><button class="btn btn-danger">REMOVE</button></a>
+                            </div>
+            
+                        
+                    </div>
+                    {% endfor %}
+            
+            
+                    {% for i in samsungcartitem %}
+                    <div class="cartitemsdiv">
+            
+                            <img src="{{i.samsungproduct.Image.url}}" alt="">
+                            <div class="divnames">
+                                <h4>{{i.samsungproduct.Name}}</h4>
+                                <h5>{{i.samsungproduct.Cost}}/- Rs</h5>
+                                <span style="color: rgb(13, 255, 0);">In stock</span>
+                                <p><span>Eligible for FREE Shipping</span></p>
+                                <div class="d-flex justify-content-evenly">
+                                    <a class="btn btn-danger" href="{% url 'APP:samsungdecrement' i.samsungproduct.id %}" style="width: 30px; height: 30px;">-</a>{{i.quantity}}<a class="btn btn-primary" href="{% url 'APP:samsungincrement' i.samsungproduct.id %}" style="width: 30px; height: 30px;">+</a>
+                                </div>
+                                
+                            </div>
+                            <div>
+                                <a href="{% url 'APP:samsungremoveitemcart' i.id %}"><button class="btn btn-danger">REMOVE</button></a>
+                            </div>
+            
+                        
+                    </div>
+                    {% endfor %}
+                    
+            
+                    {% for i in redmicartitem %}
+                    <div class="cartitemsdiv">
+            
+                            <img src="{{i.redmiproduct.Image.url}}" alt="">
+                            <div class="divnames">
+                                <h4>{{i.redmiproduct.Name}}</h4>
+                                <h5>{{i.redmiproduct.Cost}}/- Rs</h5>
+                                <span style="color: rgb(13, 255, 0);">In stock</span>
+                                <p><span>Eligible for FREE Shipping</span></p>
+                                <div class="d-flex justify-content-evenly">
+                                    <a class="btn btn-danger" href="{% url 'APP:redmidecrement' i.redmiproduct.id %}" style="width: 30px; height: 30px;">-</a>{{i.quantity}}<a class="btn btn-primary" href="{% url 'APP:redmiincrement' i.redmiproduct.id %}" style="width: 30px; height: 30px;">+</a>
+                                </div>
+                                
+                            </div>
+                            <div>
+                                <a href="{% url 'APP:redmiremoveitemcart' i.id %}"><button class="btn btn-danger">REMOVE</button></a>
+                            </div>
+            
+                        
+                    </div>
+                    {% endfor %}
+                    
+            
+            
+                    {% for i in realmecartitem %}
+                    <div class="cartitemsdiv">
+            
+                            <img src="{{i.realmeproduct.Image.url}}" alt="">
+                            <div class="divnames">
+                                <h4>{{i.realmeproduct.Name}}</h4>
+                                <h5>{{i.realmeproduct.Cost}}/- Rs</h5>
+                                <span style="color: rgb(13, 255, 0);">In stock</span>
+                                <p><span>Eligible for FREE Shipping</span></p>
+                                <div class="d-flex justify-content-evenly">
+                                    <a class="btn btn-danger" href="{% url 'APP:realmedecrement' i.realmeproduct.id %}" style="width: 30px; height: 30px;">-</a>{{i.quantity}}<a class="btn btn-primary" href="{% url 'APP:realmeincrement' i.realmeproduct.id %}" style="width: 30px; height: 30px;">+</a>
+                                </div>
+                                
+                            </div>
+                            <div>
+                                <a href="{% url 'APP:realmeremoveitemcart' i.id %}"><button class="btn btn-danger">REMOVE</button></a>
+                            </div>
+            
+                        
+                    </div>
+                    {% endfor %}
+                    {% else %}
+                        <div style="width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                            <h3 style="width: fit-content;">YOUR CART IS EMPTY</h3>
+                            <a href="{% url 'AppleApp:categories' %}" class="btn btn-primary" style="width: 200px;">SHOP NOW</a>
+                        </div>
+                    {% endif %}
+                    
+    
+                    
+                </div>
+                <div class="card card-header d-flex justify-content-center align-items-center">
+                    <p style="width: 500px; height: fit-content;" class=" d-flex justify-content-between align-items-center"><b style="width: fit-content;">TOTAL PRIZE :</b>  <b style="width: fit-content;">{{totalprize}}/- Rs</b></p>
+                </div>
+            </div>
+
+            <div class="paymentform p-3 me-5">
+                <h3 style="text-align: center;">Address and Payment Details</h3>
+                <form action="" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <div class="card card-body h-75 overflow-scroll">
+                        <div class="mb-4 d-flex justify-content-start align-items-center">
+                            <label for="fn" class="form-label" style="width: 150px;">Full Name</label>
+                            <input type="text" name="FullName" id="fn" class="form-control" style="width: 300px;" required>
+                        </div>
+        
+                        <div class="mb-4 d-flex justify-content-start align-items-center">
+                            <label for="e" class="form-label" style="width: 150px;">Email</label>
+                            <input type="email" name="Email" id="e" class="form-control" style="width: 300px;" required>
+                        </div>
+    
+                        <div class="mb-4 d-flex justify-content-start align-items-center">
+                            <label for="ph" class="form-label" style="width: 150px;">Mobile Number</label>
+                            <input type="tel" name="PhNo" id="ph" class="form-control" style="width: 300px;" required>
+                        </div>
+                        
+                        <div class="mb-4 d-flex justify-content-start align-items-center">
+                            <label for="pm" class="form-label" style="width: 200px;">Payment mode</label>
+                            <div class="w-50 d-flex justify-content-start align-items-center">
+                                <input type="radio" name="PaymentMode" id="pm" value="COD" required>
+                                <label for="pm" class="form-label">COD</label>
+                            </div>   
+                            <div class="w-50 d-flex justify-content-start align-items-center">
+                                <input type="radio" name="PaymentMode" id="pm2" value="UPI" required>
+                                <label for="pm2" class="form-label">UPI</label>
+                            </div>
+                            
+                        </div>
+    
+                        <div class="mb-4 d-flex justify-content-start align-items-center">
+                            <label for="pin" class="form-label" style="width: 150px;">Pin Code</label>
+                            <input type="number" maxlength="1000" minlength="500" name="PinCode" id="pin" class="form-control" style="width: 300px;" required>
+                        </div>
+    
+                        <div class="mb-4 d-flex justify-content-start align-items-center">
+                            <label for="ad" class="form-label" style="width: 150px;">Address</label>
+                            <textarea type="text" name="Address" id="ad" class="form-control" cols="30" rows="6" style="width: 300px;" required>
+                            </textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4">
+                        <a href="{% url 'APP:paymentsuccessfull' %}" type="submit" class="btn btn-outline-success">Submit</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        
+        <!-- <p>Total Prize : {{appletotalprize}} + {{oneplustotalprize}} + {{samsungtotalprize}} + {{redmitotalprize}} + {{realmetotalprize}}</p> -->
+        
+
+<script src="{% static 'cartitems.js' %}"></script>
+{% endblock body %}

@@ -1,0 +1,121 @@
+{% extends 'nav.html' %}
+{% load static %}
+
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'cate.css' %}">
+<style>
+    #cate{
+    width: 100%;
+    height: 15vh;
+    position: absolute;
+    top: 73px;
+    background-color: #FFCE32;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 50px 300px;
+
+}
+
+#cate>a{
+    width: 100px;
+    height: 100px;
+    background-color: rgba(153, 205, 50, 0);
+    border-radius: 50%;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+
+}
+
+#applecate{
+    border: solid 3px #1D63FF;
+}
+
+.cards1{
+    width: 250px;
+    height: 300px;
+    border: solid 1px black;
+    padding: 10px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.cards1 img{
+    width: 100px;
+    height: 130px;
+}
+
+#imgcard{
+    width: fit-content;
+}
+
+#totalc1, #totalc12{
+    width: 100%;
+    height: auto;
+    padding: 150px;
+    position: relative;
+    top: 100px;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    row-gap: 50px;
+}
+
+</style>
+{% endblock head %}
+
+{% block body %}
+
+<div id="cate">
+    <a id="applecate1" href="{% url 'AppleApp:categories' %}">
+        Apple
+    </a>
+    <a id="onepluscate1" href="{% url 'OneplusAPP:Onepluscategories' %}">
+        Oneplus
+    </a>
+    <a id="samsungcate1" href="{% url 'SamsungApp:samsungcategories' %}">
+        Samsung
+    </a>
+    <a id="redmicate1" href="{% url 'RedmiApp:redmicategories' %}">
+    Redmi
+    </a>
+    <a id="realmecate1" href="{% url 'RealmeApp:realmecategories' %}">
+    Realme
+    </a>
+
+</div>
+
+<div id="totalc1">
+    {% for i in ad %}
+        {% if i.id != 1 %}
+        
+        <div class="cards1">
+            <!-- {{i.slug}} -->
+            <div id="imgcard">
+                <a href="{% url 'AppleApp:applepro' i.slug %}"><img src="{{i.Image.url}}" alt="apple"></a>
+            </div>
+            <div>
+                <h5 style="text-align: center;">{{i.Name}}</h5>
+                <h6 style="text-align: center;">{{i.Cost}}/- Rs</h6>
+                <!-- <p>{{i.Image}}</p> -->
+            </div>
+            <div style="display: flex; justify-content: space-evenly; align-items: center;">
+                <a href="{% url 'APP:addtocart' i.slug i.id %}"><button class="btn btn-warning w-auto " id="cartbtn" style="font-size: 12px;">ADD TO CART</button></a>
+                <a href="{% url 'APP:buynow' i.slug %}"><button class="btn btn-primary w-auto" style="font-size: 12px;">BUY NOW</button></a>
+            </div>
+        </div>
+        {% endif %}
+    {% endfor %}
+</div>
+
+
+<script src="{% static 'catnav.js' %}"></script>
+<script src="{% static 'cart.js' %}"></script>
+{% endblock body %}

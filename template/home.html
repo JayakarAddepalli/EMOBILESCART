@@ -1,0 +1,262 @@
+{% extends 'nav.html' %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'home.css' %}">
+    <style>
+
+        *{
+            box-sizing: border-box;
+            padding: 0px;
+            margin: 0px;
+            width: 100%;
+        }
+
+        #mainhead{
+            width: 100%;
+            height: 100vh;
+            background-color: #FFCE32;
+        }
+        #mainhead>div{
+            width: 100%;
+            height: 100vh;
+            color: black;
+            font-size: 40px;
+            z-index: 0;
+            padding: 150px 115px;
+            /* background-color: yellowgreen; */
+        }
+
+        #trendingsdiv{
+            width: 100%;
+            height: auto;
+            padding: 80px;
+            margin-top: 50px;
+            /* background-color: yellowgreen; */
+        }
+
+        #trendingsdiv>div{
+            width: 100%;
+            height: auto;
+            padding: 30px;
+        }
+
+        #trendingblock{
+            width: 100%;
+            height: auto;
+            background-color: black;
+            display: flex;
+            justify-content: space-evenly !important;
+            align-items: center !important;
+            border: solid 1px black;
+            border-radius: 20px;
+        }
+
+        #trendingblock>div+div{
+            width: 400px;
+            height: 100px;
+            /* background-color: rgb(224, 255, 163); */
+        }
+
+        .trendImg{
+            width: 600px;
+            height: 350px;
+            padding: 10px;
+        }
+
+        #trendingbtn{
+            width: 200px;
+            height: 80px;
+            border: none;
+            border-radius: 50px;
+            font-size: 20px;
+            font-weight: bold;
+            position: relative;
+            bottom: 50px;
+            left: 0%;
+            background-color: #1D63FF;
+            color: white;
+            z-index: -1;
+            text-decoration: none;
+            text-align: center;
+            padding: 28px 0px;
+        }
+
+        #btntrend{
+            position: absolute;
+            height: 100px !important;
+            z-index: -1;
+            bottom: 0px;
+            left: 0%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            /* background-color: rgb(89, 50, 205) !important; */
+        }
+
+        #trendingbtn:hover{
+            background-color: transparent;
+            border: solid 2px #1D63FF;
+            color: #1D63FF;
+            transition: all 1s;
+        }
+
+        .Bestlogos{
+            width: 150px;
+            height: 150px;
+        }
+
+        #ci, #ci2, #ci3{
+            height: 80vh;
+            padding: 80px;
+            
+        }
+
+        .bi{
+            width: 150px;
+            height: 150px;
+            z-index: 0;
+            position: absolute;
+            right: 200px;
+            top: 100px;
+            /* left: 100px; */
+        }
+
+        /* .marqueetag{
+            width: 100%;
+            height: 20vh;
+            background-color: yellowgreen;
+            position: relative;
+            z-index: 1;
+        }
+
+        .marqueetag>marquee{
+            font-size: 90px;
+            opacity: 0.5;
+            z-index: 1;
+        }
+        
+        .maqinnerdiv{
+            width: 300px;
+            height: 100px;
+            background-color: #1D63FF;
+            position: absolute;
+            top: 20px;
+            left: 40%;
+            z-index: 0;
+        } */
+
+        
+
+    </style>
+{% endblock head %}
+
+{% block body %}
+
+<div id="mainhead">
+
+      <div id="carouselExampleDark" class="carousel carousel-dark slide">
+        <div class="carousel-indicators w-auto">
+          <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+          <div class="carousel-item active" id="ci" data-bs-interval="10000">
+            <h1 style="font-size: 70px; font-weight: bold;"><span style="color: #1D63FF;" id="Eheading">E-MOBILES</span><br>THE PERFECT<br> CHOICE</h1>
+            <img src="{% static 'best.png' %}" alt="..." class="bi">
+          </div>
+          <div class="carousel-item" id="ci2" data-bs-interval="2000">
+            <h1 style="font-size: 70px; font-weight: bold;">YOUR DATA IS<br><span style="color: #1D63FF;">SECURIED</span></h1>
+            <img src="{% static 'security.png' %}" alt="..." class="bi">
+          </div>
+          <div class="carousel-item" id="ci3">
+            <h1 style="font-size: 70px; font-weight: bold;">EASY WAY FOR<br><span style="color: #1D63FF;">SHOPPING</span></h1>
+            <img src="{% static 'easyshopping.png' %}" alt="..." class="bi">
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <!-- <span class="visually-hidden">Previous</span> -->
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <!-- <span class="visually-hidden">Next</span> -->
+        </button>
+      </div>
+        
+        <div data-aos="fade-up" data-aos-offset="30" id="btntrend" class="">
+        <a href="#trendingsdiv" id="trendingbtn">TRENDINGS</a>
+        </div>
+    
+        
+</div>
+
+
+<div id="trendingsdiv">
+    <h1 style="text-align: center; font-size: 50px; font-weight: lighter;">NEWLY LAUNCHED MOBILES</h1><br>
+    <div>
+        {% for i in d %}
+        <div data-aos="fade-right" data-aos-offset="300" data-aos-easing="ease-in-sine" id="trendingblock">
+            <div class="trendImg">
+                <a href=""><img src="{{i.Trend1.Image.url}}" alt="trendingimages"></a>
+                <!-- <p>{{i.Image}}</p> -->
+            </div>
+            <div style="color: white; height: auto;">
+                <h2>{{i.Trend1.Name}}</h2><br>
+                <h6 style="font-weight: lighter;">{{i.Trend1.Info}}</h6><br>
+                <h3>{{i.Trend1.Cost}}/- Rs</h3>
+            </div>
+        </div><br><br><br><br><br>
+
+        <div data-aos="fade-right" data-aos-offset="300" data-aos-easing="ease-in-sine" id="trendingblock">
+            <div class="trendImg">
+                <a href=""><img src="{{i.Trend2.Image.url}}" alt="trendingimages"></a>
+                <!-- <p>{{i.Image}}</p> -->
+            </div>
+            <div style="color: white; height: auto;">
+                <h2>{{i.Trend2.Name}}</h2><br>
+                <h6 style="font-weight: lighter;">{{i.Trend2.Info}}</h6><br>
+                <h3>{{i.Trend2.Cost}}/- Rs</h3>
+            </div>
+        </div><br><br><br><br><br>
+
+        <div data-aos="fade-right" data-aos-offset="300" data-aos-easing="ease-in-sine" id="trendingblock">
+            <div class="trendImg">
+                <a href=""><img src="{{i.Trend3.Image.url}}" alt="trendingimages"></a>
+                <!-- <p>{{i.Image}}</p> -->
+            </div>
+            <div style="color: white; height: auto;">
+                <h2>{{i.Trend3.Name}}</h2><br>
+                <h6 style="font-weight: lighter;">{{i.Trend3.Info}}</h6><br>
+                <h3>{{i.Trend3.Cost}}/- Rs</h3>
+            </div>
+        </div><br><br><br><br><br>
+
+        <div data-aos="fade-right" data-aos-offset="300" data-aos-easing="ease-in-sine" id="trendingblock">
+            <div class="trendImg">
+                <a href=""><img src="{{i.Trend4.Image.url}}" alt="trendingimages"></a>
+                <!-- <p>{{i.Image}}</p> -->
+            </div>
+            <div style="color: white; height: auto;">
+                <h2>{{i.Trend4.Name}}</h2><br>
+                <h6 style="font-weight: lighter;">{{i.Trend4.Info}}</h6><br>
+                <h3>{{i.Trend4.Cost}}/- Rs</h3>
+            </div>
+        </div><br><br><br><br><br>
+        {% endfor %}
+        
+    </div>
+</div>
+
+<!-- <div class="marqueetag">
+    <marquee>E-MOBILES</marquee>
+    <div class="maqinnerdiv">
+
+    </div>
+</div> -->
+
+
+<script src="{% static 'home.js' %}"></script>
+
+{% endblock body %}
