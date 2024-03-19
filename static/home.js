@@ -2,7 +2,6 @@ let th = document.getElementById('Eheading');
 let nav = document.getElementById('navbar');
 let bd = document.getElementsByTagName('body')[0];
 
-let homeanchor = document.getElementById('homeanchor');
 
 // console.log(nav);
 // th.addEventListener('click',()=>{
@@ -10,13 +9,7 @@ let homeanchor = document.getElementById('homeanchor');
 // })
 
 
-if(window.location.href == 'http://127.0.0.1:8000/APP/home/'){
-    homeanchor.style.color = '#1D63FF';
-}
 
-else{
-    homeanchor.style.color = 'black';
-}
 
 window.addEventListener('scroll',()=>{
     console.log(th.getBoundingClientRect());

@@ -17,6 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
+from APP.views import HomeView
 
 from django.conf.urls.static import static
 
@@ -29,6 +30,7 @@ app_name = 'RealmeApp'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', HomeView, name='home'),
     path('APP/', include('APP.urls')),
     path('AppleApp/', include('AppleApp.urls')),
     path('OneplusApp/',include('OneplusAPP.urls')),

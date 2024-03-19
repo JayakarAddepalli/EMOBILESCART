@@ -258,5 +258,17 @@
 
 
 <script src="{% static 'home.js' %}"></script>
+<script>
+
+    let homeanchor = document.getElementById('homeanchor');
+
+    if(window.location.href == 'http://127.0.0.1:8000'){
+        homeanchor.style.color = '#1D63FF';
+    }
+
+    else{
+        homeanchor.style.color = 'black';   
+    }
+</script>
 
 {% endblock body %}

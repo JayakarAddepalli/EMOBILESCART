@@ -40,7 +40,7 @@ def CusLoginView(request):
             user = authenticate(username = f.cleaned_data['username'], password = f.cleaned_data['password'])
             if user:
                 login(request, user)
-                return redirect(reverse('APP:home'), {'u':user})
+                return render(request, 'home.html', {'u':user})
             else:
                 messages.info(request, 'invalid username or password')
                 return redirect(reverse('APP:login'))
