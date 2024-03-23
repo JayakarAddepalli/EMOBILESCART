@@ -3,72 +3,8 @@
 
 
 {% block head %}
-<link rel="stylesheet" href="{% static 'cate.css' %}">
-<style>
-    #cate{
-    width: 100%;
-    height: 15vh;
-    position: absolute;
-    top: 73px;
-    background-color: #FFCE32;
-    display:flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 50px 300px;
+<link rel="stylesheet" href="{% static 'Categorie.css' %}">
 
-}
-
-#cate>a{
-    width: 100px;
-    height: 100px;
-    background-color: rgba(153, 205, 50, 0);
-    border-radius: 50%;
-    z-index: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-decoration: none;
-
-}
-
-#applecate{
-    border: solid 3px #1D63FF;
-}
-
-.cards1{
-    width: 250px;
-    height: 300px;
-    border: solid 1px black;
-    padding: 10px;
-    border-radius: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-}
-
-.cards1 img{
-    width: 100px;
-    height: 130px;
-}
-
-#imgcard{
-    width: fit-content;
-}
-
-#totalc1, #totalc12{
-    width: 100%;
-    height: auto;
-    padding: 150px;
-    position: relative;
-    top: 100px;
-    display: grid;
-    grid-template-rows: 1fr 1fr;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    row-gap: 50px;
-}
-
-</style>
 {% endblock head %}
 
 {% block body %}
@@ -107,8 +43,8 @@
                 <!-- <p>{{i.Image}}</p> -->
             </div>
             <div style="display: flex; justify-content: space-evenly; align-items: center;">
-                <a href="{% url 'APP:addtocart' i.slug i.id %}"><button class="btn btn-warning w-auto " id="cartbtn" style="font-size: 12px;">ADD TO CART</button></a>
-                <a href="{% url 'APP:buynow' i.slug %}"><button class="btn btn-primary w-auto" style="font-size: 12px;">BUY NOW</button></a>
+                <a href="{% url 'APP:addtocart' i.slug i.id %}" class="btn btn-warning w-auto " id="cartbtn" style="font-size: 12px;">ADD TO CART</a>
+                <a href="{% url 'APP:buynow' i.id %}" class="btn btn-primary w-auto" style="font-size: 12px;">BUY NOW</a>
             </div>
         </div>
         {% endif %}
@@ -117,5 +53,5 @@
 
 
 <script src="{% static 'catnav.js' %}"></script>
-<script src="{% static 'cart.js' %}"></script>
+
 {% endblock body %}

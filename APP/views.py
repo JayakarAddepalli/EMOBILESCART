@@ -54,15 +54,62 @@ def CusLogoutView(request):
     logout(request)
     return redirect(reverse('APP:user'))
 
-def BUYNOWVIEW(request, slug):
-    apple_prod_details = Apple.objects.filter(slug=slug)
-    Oneplus_prod_details = Oneplus.objects.filter(slug=slug)
-    Samsung_prod_details = Samsung.objects.filter(slug=slug)
-    Realme_prod_details = Realme.objects.filter(slug=slug)
-    Redmi_prod_details = Redmi.objects.filter(slug=slug)
+def APPLEBUYNOWVIEW(request, id):
 
-    prod_details = {'a_p_d':apple_prod_details, 'o_p_d':Oneplus_prod_details, 'rel_p_d':Realme_prod_details, 's_d_p':Samsung_prod_details, 'red_p_d':Redmi_prod_details}
-    return render(request, 'buynow.html', context=prod_details)
+    appleproduct = Apple.objects.get(id=id)
+    
+    cartitem, created = CartItem.objects.get_or_create(appleproduct = appleproduct, user = request.user)
+    cartitem.quantity += 1
+    cartitem.save()
+
+    return redirect(reverse('APP:viewcart'))
+
+
+def ONEPLUSBUYNOWVIEW(request, id):
+
+    oneplusproduct = Oneplus.objects.get(id=id)
+    
+
+    cartitem, created = OneplusCartItem.objects.get_or_create(oneplusproduct = oneplusproduct, user = request.user)
+    cartitem.quantity += 1
+    cartitem.save()
+
+    return redirect(reverse('APP:viewcart'))
+
+
+def SAMSUNGBUYNOWVIEW(request, id):
+
+    samsungproduct = Samsung.objects.get(id=id)
+    
+
+    cartitem, created = SamsungCartItem.objects.get_or_create(samsungproduct = samsungproduct, user = request.user)
+    cartitem.quantity += 1
+    cartitem.save()
+
+    return redirect(reverse('APP:viewcart'))
+
+def REDMIBUYNOWVIEW(request, id):
+
+    redmiproduct = Redmi.objects.get(id=id)
+    
+
+    cartitem, created = RedmiCartItem.objects.get_or_create(redmiproduct = redmiproduct, user = request.user)
+    cartitem.quantity += 1
+    cartitem.save()
+    
+    return redirect(reverse('APP:viewcart'))
+
+
+def REALMEBUYNOWVIEW(request, id):
+
+    realmeproduct = Realme.objects.get(id=id)
+    
+
+    cartitem, created = RealmeCartItem.objects.get_or_create(realmeproduct = realmeproduct, user = request.user)
+    cartitem.quantity += 1
+    cartitem.save()
+    
+    return redirect(reverse('APP:viewcart'))
 
 
 # def view_cart(request):
@@ -99,8 +146,25 @@ def viewcart(request):
 
     return render(request, 'cart.html', {'form':form, 'cartitems':cartitems, 'onepluscartitem':onepluscartitem, 'samsungcartitem':samsungcartitem, 'redmicartitem':redmicartitem, 'realmecartitem':realmecartitem, 'appletotalprize':applesum, 'oneplustotalprize':oneplussum, 'samsungtotalprize':samsungsum, 'redmitotalprize':redmisum, 'realmetotalprize':realmesum, 'totalprize':totalprize})
 
-def successview(request):
-    return render(request, 'success.html')
+@login_required(login_url='APP:login')
+def successviewcheck(request):
+    if(request.method == 'POST'):
+        form = PaymentForm(request.POST)
+        if form:
+            if form.is_valid():
+                form.save(commit=True)
+                return redirect(reverse('APP:successpage'))
+        else:
+            return redirect(reverse('APP:viewcart'))
+
+    form = PaymentForm()
+    return render(request, 'cart.html', {'f':form})
+   
+
+@login_required(login_url='APP:login')
+def successpageview(request):
+    return render(request, 'successpage.html')
+
 #==============================apple cart==================================
 def addtocartview(request, slug=None, id=None):
     appleproduct = Apple.objects.get(id=id)

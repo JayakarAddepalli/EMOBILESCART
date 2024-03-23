@@ -2,7 +2,7 @@ let cate = document.getElementById('cate');
 
 let nav = document.getElementById('navbar');
 
-let cateanchor1 = document.getElementById('cateanchor1');
+
 
 
 
@@ -20,13 +20,16 @@ let totalc15 = document.getElementById('totalc15');
 
 // console.log(cateanchor1);
 
-if((window.location.href == 'http://127.0.0.1:8000/AppleApp/categories/apple/') || (window.location.href == 'http://127.0.0.1:8000/OneplusApp/categories/oneplus/') || (window.location.href == 'http://127.0.0.1:8000/SamsungApp/categories/samsung/') || (window.location.href == 'http://127.0.0.1:8000/RedmiApp/categories/redmi/') || (window.location.href == 'http://127.0.0.1:8000/RealmeApp/categories/realme/')){
-    cateanchor1.style.color = '#1D63FF';
-}
+let cateanchor1 = document.getElementById('cateanchor');
 
-else{
-    cateanchor1.style.color = 'black';
-}
+    if((window.location.href == 'https://jayakara.pythonanywhere.com/AppleApp/categories/apple/') || (window.location.href == 'https://jayakara.pythonanywhere.com/OneplusApp/categories/oneplus/') || (window.location.href == 'https://jayakara.pythonanywhere.com/SamsungApp/categories/samsung/') || (window.location.href == 'https://jayakara.pythonanywhere.com/RedmiApp/categories/redmi/') || (window.location.href == 'https://jayakara.pythonanywhere.com/RealmeApp/categories/realme/')){
+        cateanchor1.style.color = '#1D63FF';
+    }
+
+    else{
+        cateanchor1.style.color = 'black';
+    }
+
 
 // console.log(cate.getBoundingClientRect().top);
 
@@ -43,69 +46,15 @@ window.addEventListener('scroll',()=>{
 
 
 
-applecate1.addEventListener('click',()=>{
-    location.href = 'http://127.0.0.1:8000/AppleApp/categories/apple/';
 
-    // console.log(true);
-    totalc1.style.display = 'block';
-    totalc12.style.display = 'none';
-    totalc13.style.display = 'none';
-    totalc14.style.display = 'none';
-    totalc15.style.display = 'none';
-})
-
-onepluscate1.addEventListener('click',()=>{
-    location.href = 'http://127.0.0.1:8000/OneplusApp/categories/oneplus/';
-
-    totalc1.style.display = 'none';
-    totalc12.style.display = 'block';
-    totalc13.style.display = 'none';
-    totalc14.style.display = 'none';
-    totalc15.style.display = 'none';
-
-})
-
-samsungcate1.addEventListener('click',()=>{
-    location.href = 'http://127.0.0.1:8000/SamsungApp/categories/samsung/';
-
-    totalc1.style.display = 'none';
-    totalc13.style.display = 'block';
-    totalc12.style.display = 'none';
-    totalc14.style.display = 'none';
-    totalc15.style.display = 'none';
-
-})
-
-redmicate1.addEventListener('click',()=>{
-    location.href = 'http://127.0.0.1:8000/RedmiApp/categories/redmi/';
-
-    totalc1.style.display = 'none';
-    totalc14.style.display = 'block';
-    totalc12.style.display = 'none';
-    totalc13.style.display = 'none';
-    totalc15.style.display = 'none';
-
-})
-
-realmecate1.addEventListener('click',()=>{
-    location.href = 'http://127.0.0.1:8000/RealmeApp/categories/realme/';
-
-    totalc1.style.display = 'none';
-    totalc15.style.display = 'block';
-    totalc12.style.display = 'none';
-    totalc13.style.display = 'none';
-    totalc14.style.display = 'none';
-
-})
-
-if(window.location.href == 'http://127.0.0.1:8000/AppleApp/categories/apple/'){
+if(window.location.href == 'https://jayakara.pythonanywhere.com/AppleApp/categories/apple/'){
     applecate1.style.border = 'solid 3px #1D63FF';
     onepluscate1.style.border = 'none';
     samsungcate1.style.border = 'none';
     redmicate1.style.border = 'none';
     realmecate1.style.border = 'none';
 }
-else if(window.location.href == 'http://127.0.0.1:8000/OneplusApp/categories/oneplus/'){
+else if(window.location.href == 'https://jayakara.pythonanywhere.com/OneplusApp/categories/oneplus/'){
     applecate1.style.border = 'none';
     onepluscate1.style.border = 'solid 3px #1D63FF';
     samsungcate1.style.border = 'none';
@@ -113,7 +62,7 @@ else if(window.location.href == 'http://127.0.0.1:8000/OneplusApp/categories/one
     realmecate1.style.border = 'none';
 }
 
-else if(window.location.href == 'http://127.0.0.1:8000/SamsungApp/categories/samsung/'){
+else if(window.location.href == 'https://jayakara.pythonanywhere.com/SamsungApp/categories/samsung/'){
     applecate1.style.border = 'none';
     onepluscate1.style.border = 'none';
     samsungcate1.style.border = 'solid 3px #1D63FF';
@@ -121,7 +70,7 @@ else if(window.location.href == 'http://127.0.0.1:8000/SamsungApp/categories/sam
     realmecate1.style.border = 'none';
 }
 
-else if(window.location.href == 'http://127.0.0.1:8000/RedmiApp/categories/redmi/'){
+else if(window.location.href == 'https://jayakara.pythonanywhere.com/RedmiApp/categories/redmi/'){
     applecate1.style.border = 'none';
     onepluscate1.style.border = 'none';
     samsungcate1.style.border = 'none';
@@ -129,7 +78,7 @@ else if(window.location.href == 'http://127.0.0.1:8000/RedmiApp/categories/redmi
     realmecate1.style.border = 'none';
 }
 
-else if(window.location.href == 'http://127.0.0.1:8000/RealmeApp/categories/realme/'){
+else if(window.location.href == 'https://jayakara.pythonanywhere.com/RealmeApp/categories/realme/'){
     applecate1.style.border = 'none';
     onepluscate1.style.border = 'none';
     samsungcate1.style.border = 'none';

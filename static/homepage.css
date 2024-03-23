@@ -1,0 +1,403 @@
+
+*{
+    box-sizing: border-box;
+    padding: 0px;
+    margin: 0px;
+    width: 100%;
+}
+
+#mainhead{
+    width: 100%;
+    height: 100vh;
+    background-color: #FFCE32;
+}
+#mainhead>div{
+    width: 100%;
+    height: 100vh;
+    color: black;
+    font-size: 40px;
+    z-index: 0;
+    padding: 150px 115px;
+    /* background-color: yellowgreen; */
+}
+
+.couhead{
+    font-size: 70px;
+    font-weight: bold;
+}
+
+#trendingsdiv{
+    width: 100%;
+    height: auto;
+    padding: 80px;
+    margin-top: 50px;
+    /* background-color: yellowgreen; */
+}
+
+#trendingsdiv>div{
+    width: 100%;
+    height: auto;
+    padding: 30px;
+}
+
+#trendingblock{
+    width: 100%;
+    height: auto;
+    background-color: black;
+    display: flex;
+    justify-content: space-evenly !important;
+    align-items: center !important;
+    border: solid 1px black;
+    border-radius: 20px;
+}
+
+#trendingblock>div+div{
+    width: 400px;
+    height: 100px;
+    /* background-color: rgb(224, 255, 163); */
+}
+
+.trendImg{
+    width: 600px;
+    height: 350px;
+    padding: 10px;
+}
+
+#trendingbtn{
+    width: 200px;
+    height: 80px;
+    border: none;
+    border-radius: 50px;
+    font-size: 20px;
+    font-weight: bold;
+    position: relative;
+    bottom: 50px;
+    left: 0%;
+    background-color: #1D63FF;
+    color: white;
+    z-index: -1;
+    text-decoration: none;
+    text-align: center;
+    padding: 28px 0px;
+}
+
+#btntrend{
+    position: absolute;
+    height: 100px !important;
+    z-index: -1;
+    bottom: 0px;
+    left: 0%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    /* background-color: rgb(89, 50, 205) !important; */
+}
+
+#info{
+    display: block;
+}
+
+#trendingbtn:hover{
+    background-color: transparent;
+    border: solid 2px #1D63FF;
+    color: #1D63FF;
+    transition: all 1s;
+}
+
+.Bestlogos{
+    width: 150px;
+    height: 150px;
+}
+
+#ci, #ci2, #ci3{
+    height: 80vh;
+    padding: 80px;
+    
+}
+
+.bi{
+    width: 150px;
+    height: 150px;
+    z-index: 0;
+    position: absolute;
+    right: 200px;
+    top: 100px;
+    /* left: 100px; */
+}
+
+.trendhead{
+    text-align: center; 
+    font-size: 50px;
+    font-weight: lighter;
+}
+
+.creacct{
+    font-size: 80px;
+    line-height: 60px;
+}
+
+.creaccthead{
+    font-size: 80px;
+}
+
+.lastdiv{
+    width: 100%;
+    height: 140vh;
+    background-color: #FFCE32;
+    position: relative;
+    top: 50px;
+    text-align: center;
+    padding: 200px 0px;
+}    
+
+.lastdiv h1{
+    font-size: 80px;
+}
+
+.para{
+    font-weight: normal;
+    font-size: 20px;
+    color: rgb(76, 76, 76);
+}
+
+#shpnow{
+    width: 300px;
+    height: 100px;
+    font-size: 35px;
+}
+
+#shopdiv{
+    position: relative;
+    top: 100px;
+    height: 250px;
+    display: flex;
+    justify-content: center;
+}
+
+.copyright{
+    width: 100%;
+    height: 150px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position: relative;
+    top: 100px;
+    /* background-color: aqua; */
+}
+
+.copyright>div{
+    width: fit-content;
+}
+
+@media only screen and (max-width:365px){
+    #mainhead{
+        width: 100%;
+        height: 100vh;
+        background-color: #FFCE32;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        top: 70px;
+    }
+    #mainhead>div{
+        width: 100%;
+        height: 100vh;
+        color: black;
+        font-size: 30px;
+        z-index: 0;
+        padding: 0px;
+        /* background-color: yellowgreen; */
+    }
+
+    
+    #trendingsdiv{
+        width: 100%;
+        height: auto;
+        padding: 50px 0px;
+        margin-top: 70px;
+        /* background-color: yellowgreen; */
+    }
+    
+    #trendingsdiv>div{
+        width: 100%;
+        height: auto;
+        padding: 0px;
+    }
+    
+    #trendingblock{
+        width: 300px;
+        height: 300px;
+        background-color: black;
+        display: flex;
+        flex-direction: column;
+        justify-content: center !important;
+        align-items: center !important;
+        border: solid 1px black;
+        border-radius: 50%;
+        position: relative;
+        left: 30px;
+    }
+    
+    #trendingblock>div+div{
+        width: 200px;
+        height: 200px;
+        padding: 0px;
+        text-align: center;
+        /* background-color: rgb(224, 255, 163); */
+    }
+
+    #trendingblock>div+div>h2, #trendingblock>div+div>h3{
+        font-size: 20px !important;
+    }
+
+    #info{
+        display: none;
+    }
+    
+    .trendImg{
+        width: 130px;
+        height: 130px;
+        padding: 0px;
+        border-radius: 50%;
+    }
+    
+    #trendingbtn{
+        width: 130px;
+        height: 40px;
+        border: none;
+        border-radius: 50px;
+        font-size: 15px;
+        font-weight: bold;
+        position: relative;
+        bottom: 100px;
+        left: 0%;
+        background-color: #1D63FF;
+        color: white;
+        z-index: -1;
+        text-decoration: none;
+        text-align: center;
+        padding: 10px 0px;
+    }
+    
+    #btntrend{
+        position: absolute;
+        height: 100px !important;
+        z-index: -1;
+        bottom: 0px;
+        left: 0px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        /* background-color: rgb(89, 50, 205) !important; */
+    }
+    
+    #trendingbtn:hover{
+        background-color: transparent;
+        border: solid 2px #1D63FF;
+        color: #1D63FF;
+        transition: all 1s;
+    }
+    
+    .Bestlogos{
+        width: 150px;
+        height: 150px;
+    }
+    
+    #Eheading{
+        /* background-color: rgb(158, 158, 114); */
+    }
+    
+    .couhead{
+        font-size: 35px;
+        font-weight: bold;
+    }
+
+    #ci, #ci2, #ci3{
+        height: 40vh;
+        padding: 150px 60px 350px;
+        /* background-color: tomato; */
+        
+    }
+    
+    .bi{
+        width: 100px;
+        height: 100px;
+        z-index: 0;
+        position: absolute;
+        right: 0px;
+        top: 350px;
+        right: 130px;
+        /* left: 100px; */
+    }
+    
+    .trendhead{
+        text-align: center; 
+        font-size: 30px;
+        font-weight: lighter;
+    }
+
+    .creacct{
+        font-size: 40px;
+        line-height: 40px;
+    }
+
+    .creaccthead{
+        font-size: 40px;
+    }
+    
+    .lastdiv{
+        width: 100%;
+        height: 130vh;
+        background-color: #FFCE32;
+        position: relative;
+        top: 0px;
+        text-align: center;
+        padding: 100px 0px;
+    }    
+    
+    .lastdiv h1{
+        font-size: 50px;
+    }
+    
+    .para{
+        font-weight: normal;
+        font-size: 18px;
+        color: rgb(76, 76, 76);
+    }
+    
+    #shpnow{
+        width: 280px;
+        height: 80px;
+        font-size: 30px;
+    }
+    
+    #shopdiv{
+        position: relative;
+        top: 100px;
+        height: 250px;
+        display: flex;
+        justify-content: center;
+    }
+    
+    .copyright{
+        width: 100%;
+        height: 150px;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        position: relative;
+        top: 50px;
+        /* background-color: aqua; */
+    }
+    
+    .copyright>div{
+        width: fit-content;
+        padding:10px;
+        /* background-color: yellowgreen; */
+    }
+
+    .copyright h6{
+        font-size: 15px;
+    }
+}

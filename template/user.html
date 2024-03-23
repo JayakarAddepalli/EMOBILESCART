@@ -12,30 +12,26 @@
         align-items: center;
 
     }
+
+    .loginbtn{
+        width: 200px;
+        height: 50px;
+        padding: 14px;
+    }
 </style>
 {% endblock head %}
 
 {% block body %}
 <div class="user">
         
-    <button id="admin" class="btn btn-warning w-25 mb-5 p-3">ADMIN</button>
+    <button id="admin" class="btn btn-warning mb-5 loginbtn">ADMIN</button>
     {% if request.user.is_authenticated %}
-        <a id="logout" href="{% url 'APP:logout' %}" class="btn btn-danger w-25 p-3">LOGOUT</a>
+        <a id="logout" href="{% url 'APP:logout' %}" class="btn btn-danger loginbtn">LOGOUT</a>
     {% else %}
-        <button id="customer" class="btn btn-primary w-25 p-3">CUSTOMER</button>
+        <button id="customer" class="btn btn-primary loginbtn">CUSTOMER</button>
     {% endif %}
 </div>
 
-<script src="{% static 'user.js' %}"></script>
-<script>
-    let useranchorlink = document.getElementById('useranchorlink');
-
-    if(location.href == 'http://127.0.0.1:8000/APP/user/' ){
-        useranchorlink.style.color = 'blue';
-    }
-    else{
-        useranchorlink.style.color = 'black';
-    }
-</script>
+<script src="{% static 'userjs.js' %}"></script>
 
 {% endblock body %}

@@ -2,153 +2,9 @@
 {% load static %}
 
 {% block head %}
-    <link rel="stylesheet" href="{% static 'home.css' %}">
-    <style>
+    <link rel="stylesheet" href="{% static 'homepage.css' %}">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
-        *{
-            box-sizing: border-box;
-            padding: 0px;
-            margin: 0px;
-            width: 100%;
-        }
-
-        #mainhead{
-            width: 100%;
-            height: 100vh;
-            background-color: #FFCE32;
-        }
-        #mainhead>div{
-            width: 100%;
-            height: 100vh;
-            color: black;
-            font-size: 40px;
-            z-index: 0;
-            padding: 150px 115px;
-            /* background-color: yellowgreen; */
-        }
-
-        #trendingsdiv{
-            width: 100%;
-            height: auto;
-            padding: 80px;
-            margin-top: 50px;
-            /* background-color: yellowgreen; */
-        }
-
-        #trendingsdiv>div{
-            width: 100%;
-            height: auto;
-            padding: 30px;
-        }
-
-        #trendingblock{
-            width: 100%;
-            height: auto;
-            background-color: black;
-            display: flex;
-            justify-content: space-evenly !important;
-            align-items: center !important;
-            border: solid 1px black;
-            border-radius: 20px;
-        }
-
-        #trendingblock>div+div{
-            width: 400px;
-            height: 100px;
-            /* background-color: rgb(224, 255, 163); */
-        }
-
-        .trendImg{
-            width: 600px;
-            height: 350px;
-            padding: 10px;
-        }
-
-        #trendingbtn{
-            width: 200px;
-            height: 80px;
-            border: none;
-            border-radius: 50px;
-            font-size: 20px;
-            font-weight: bold;
-            position: relative;
-            bottom: 50px;
-            left: 0%;
-            background-color: #1D63FF;
-            color: white;
-            z-index: -1;
-            text-decoration: none;
-            text-align: center;
-            padding: 28px 0px;
-        }
-
-        #btntrend{
-            position: absolute;
-            height: 100px !important;
-            z-index: -1;
-            bottom: 0px;
-            left: 0%;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            /* background-color: rgb(89, 50, 205) !important; */
-        }
-
-        #trendingbtn:hover{
-            background-color: transparent;
-            border: solid 2px #1D63FF;
-            color: #1D63FF;
-            transition: all 1s;
-        }
-
-        .Bestlogos{
-            width: 150px;
-            height: 150px;
-        }
-
-        #ci, #ci2, #ci3{
-            height: 80vh;
-            padding: 80px;
-            
-        }
-
-        .bi{
-            width: 150px;
-            height: 150px;
-            z-index: 0;
-            position: absolute;
-            right: 200px;
-            top: 100px;
-            /* left: 100px; */
-        }
-
-        /* .marqueetag{
-            width: 100%;
-            height: 20vh;
-            background-color: yellowgreen;
-            position: relative;
-            z-index: 1;
-        }
-
-        .marqueetag>marquee{
-            font-size: 90px;
-            opacity: 0.5;
-            z-index: 1;
-        }
-        
-        .maqinnerdiv{
-            width: 300px;
-            height: 100px;
-            background-color: #1D63FF;
-            position: absolute;
-            top: 20px;
-            left: 40%;
-            z-index: 0;
-        } */
-
-        
-
-    </style>
 {% endblock head %}
 
 {% block body %}
@@ -163,15 +19,15 @@
         </div>
         <div class="carousel-inner">
           <div class="carousel-item active" id="ci" data-bs-interval="10000">
-            <h1 style="font-size: 70px; font-weight: bold;"><span style="color: #1D63FF;" id="Eheading">E-MOBILES</span><br>THE PERFECT<br> CHOICE</h1>
+            <h1 class="couhead"><span style="color: #1D63FF;" id="Eheading">E-MOBILES</span><br>THE PERFECT<br> CHOICE</h1>
             <img src="{% static 'best.png' %}" alt="..." class="bi">
           </div>
           <div class="carousel-item" id="ci2" data-bs-interval="2000">
-            <h1 style="font-size: 70px; font-weight: bold;">YOUR DATA IS<br><span style="color: #1D63FF;">SECURIED</span></h1>
+            <h1 class="couhead">YOUR DATA IS<br><span style="color: #1D63FF;">SECURIED</span></h1>
             <img src="{% static 'security.png' %}" alt="..." class="bi">
           </div>
           <div class="carousel-item" id="ci3">
-            <h1 style="font-size: 70px; font-weight: bold;">EASY WAY FOR<br><span style="color: #1D63FF;">SHOPPING</span></h1>
+            <h1 class="couhead">EASY WAY FOR<br><span style="color: #1D63FF;">SHOPPING</span></h1>
             <img src="{% static 'easyshopping.png' %}" alt="..." class="bi">
           </div>
         </div>
@@ -194,7 +50,7 @@
 
 
 <div id="trendingsdiv">
-    <h1 style="text-align: center; font-size: 50px; font-weight: lighter;">NEWLY LAUNCHED MOBILES</h1><br>
+    <h1 class="trendhead">NEWLY LAUNCHED MOBILES</h1><br>
     <div>
         {% for i in d %}
         <div data-aos="fade-right" data-aos-offset="300" data-aos-easing="ease-in-sine" id="trendingblock">
@@ -203,8 +59,8 @@
                 <!-- <p>{{i.Image}}</p> -->
             </div>
             <div style="color: white; height: auto;">
-                <h2>{{i.Trend1.Name}}</h2><br>
-                <h6 style="font-weight: lighter;">{{i.Trend1.Info}}</h6><br>
+                <h2>{{i.Trend1.Name}}</h2>
+                <h6 style="font-weight: lighter;" id="info">{{i.Trend1.Info}}</h6>
                 <h3>{{i.Trend1.Cost}}/- Rs</h3>
             </div>
         </div><br><br><br><br><br>
@@ -215,8 +71,8 @@
                 <!-- <p>{{i.Image}}</p> -->
             </div>
             <div style="color: white; height: auto;">
-                <h2>{{i.Trend2.Name}}</h2><br>
-                <h6 style="font-weight: lighter;">{{i.Trend2.Info}}</h6><br>
+                <h2>{{i.Trend2.Name}}</h2>
+                <h6 style="font-weight: lighter;" id="info">{{i.Trend2.Info}}</h6>
                 <h3>{{i.Trend2.Cost}}/- Rs</h3>
             </div>
         </div><br><br><br><br><br>
@@ -227,8 +83,8 @@
                 <!-- <p>{{i.Image}}</p> -->
             </div>
             <div style="color: white; height: auto;">
-                <h2>{{i.Trend3.Name}}</h2><br>
-                <h6 style="font-weight: lighter;">{{i.Trend3.Info}}</h6><br>
+                <h2>{{i.Trend3.Name}}</h2>
+                <h6 style="font-weight: lighter;" id="info">{{i.Trend3.Info}}</h6>
                 <h3>{{i.Trend3.Cost}}/- Rs</h3>
             </div>
         </div><br><br><br><br><br>
@@ -239,8 +95,8 @@
                 <!-- <p>{{i.Image}}</p> -->
             </div>
             <div style="color: white; height: auto;">
-                <h2>{{i.Trend4.Name}}</h2><br>
-                <h6 style="font-weight: lighter;">{{i.Trend4.Info}}</h6><br>
+                <h2>{{i.Trend4.Name}}</h2>
+                <h6 style="font-weight: lighter;" id="info">{{i.Trend4.Info}}</h6>
                 <h3>{{i.Trend4.Cost}}/- Rs</h3>
             </div>
         </div><br><br><br><br><br>
@@ -249,20 +105,44 @@
     </div>
 </div>
 
-<!-- <div class="marqueetag">
-    <marquee>E-MOBILES</marquee>
-    <div class="maqinnerdiv">
+<div class="lastdiv" >
 
-    </div>
-</div> -->
+        <div data-aos="fade-up" data-aos-easing="ease-in-back" data-aos-delay="200" data-aos-offset="0" class="creacct">CREATE YOUR ACCOUNT IN </div>
+        <div data-aos="fade-up" data-aos-easing="ease-in-back" data-aos-delay="400" data-aos-offset="0" class="creaccthead"><span style="color: #1D63FF;">E-MOBILES!<sup>*</sup></span></div>
+        <div data-aos="fade-up" data-aos-easing="ease-in-back" data-aos-delay="600" data-aos-offset="0" class="creacct">& CLAIM 50% OFF.</div><br>
+        
+
+        <div data-aos="fade-up" data-aos-easing="ease-in-back" data-aos-delay="700" data-aos-offset="0" class="para">E-Mobiles is providing the brand new mobiles,</div>
+        <div data-aos="fade-up" data-aos-easing="ease-in-back" data-aos-delay="750" data-aos-offset="0" class="para">positive payments journey for the customers.</div>
 
 
+    
+
+        <div data-aos="fade-up" data-aos-easing="ease-in-back" data-aos-delay="750" data-aos-offset="0" id="shopdiv">
+            <a href="{% url 'AppleApp:categories' %}" class="btn btn-outline-primary border-3 rounded-pill d-flex justify-content-center align-items-center" id="shpnow">SHOP NOW</a>
+        </div>
+
+        <div class="copyright">
+            <div>
+                <h6>&copy; 2024 <span style="color: #1D63FF;">E-MOBILES</span>. All Rights Reserved</h6>
+            </div>
+            <div>
+                <h6>CREATED BY USING DJANGO</h6>
+            </div>
+        </div>
+</div>
+
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init();
+</script>
 <script src="{% static 'home.js' %}"></script>
 <script>
 
     let homeanchor = document.getElementById('homeanchor');
 
-    if(window.location.href == 'http://127.0.0.1:8000'){
+    if(window.location.href == 'https://jayakara.pythonanywhere.com/'){
         homeanchor.style.color = '#1D63FF';
     }
 

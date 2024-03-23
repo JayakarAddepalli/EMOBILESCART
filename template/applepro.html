@@ -1,29 +1,10 @@
 {% extends 'nav.html' %}
+{% load static %}
 
 {% block head %}
-<style>
-    .prodivele{
-        width: 100%;
-        height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    .prodivele>h1{
-        text-align: center;
-    }
+<link rel="stylesheet" href="{% static 'applepage.css' %}">
 
-    .proimg{
-        width: 300px;
-        height: 400px;
-    }
 
-    .proinfo{
-        width: 500px;
-        height: 500px;
-        padding: 80px;
-    }
-</style>
 {% endblock head %}
 
 {% block body %}
@@ -35,11 +16,12 @@
                 <div class="proinfo">
                     <h1>{{i.Name}}</h1><br><br>
                     <h5>{{i.Info}}</h5><br>
-                    <h5><b>{{i.Cost}}/- Rs</b></h5><br><br>
-                    <div style="display: flex; justify-content: start; align-items: center;">
-                        <button class="btn btn-warning w-auto me-5" style="font-size: 12px;">ADD TO CART</button>
-                        <a href="{% url 'APP:buynow' i.slug %}"><button class="btn btn-primary w-auto" style="font-size: 12px;">BUY NOW</button></a>
-                    </div>
+                    <h5><b>{{i.Cost}}/- Rs</b></h5>
+                    <h6 style="color: rgb(0, 255, 17);">Instock</h6>
+                    <br><br>
+                    <!-- <div style="display: flex; justify-content: start; align-items: center;">
+                        <a href="{% url 'APP:buynow' i.id %}"><button class="btn btn-primary w-auto" style="font-size: 12px;">BUY NOW</button></a>
+                    </div> -->
                 </div>
             {% endfor %}
             <!-- <h1>{{products}}</h1> -->
