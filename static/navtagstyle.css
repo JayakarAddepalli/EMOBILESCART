@@ -126,7 +126,7 @@ footer>div, footer>div+div+div{
     left: 0px;
 } */
 
-@media only screen and (max-width:360px){
+@media only screen and (min-width:0px) and (max-width:365px){
     #navbar{
         background-color: #FFCE32;
         display:flex;
@@ -157,8 +157,6 @@ footer>div, footer>div+div+div{
         visibility: visible;
     }
 
-    #crossdiv{
-    }
 
     #anchor{
         width: 100%;
@@ -180,7 +178,7 @@ footer>div, footer>div+div+div{
     #crossdiv{
         position: absolute;
         top: 5px;
-        right: -140px;
+        right: -135px;
         visibility: hidden;
     }
 
@@ -271,7 +269,7 @@ footer>div, footer>div+div+div{
     }
 }
 
-@media only screen and (max-width:425px){
+@media only screen and (min-width:365px) and (max-width:425px){
     #navbar{
         background-color: #FFCE32;
         display:flex;
@@ -302,8 +300,6 @@ footer>div, footer>div+div+div{
         visibility: visible;
     }
 
-    #crossdiv{
-    }
 
     #anchor{
         width: 100%;
@@ -417,7 +413,7 @@ footer>div, footer>div+div+div{
 }
 
 
-@media only screen and (max-width:768px){
+@media only screen and (min-width:425px) and (max-width:768px){
     #navbar{
         background-color: #FFCE32;
         display:flex;
@@ -446,9 +442,6 @@ footer>div, footer>div+div+div{
 
     #navicondiv{
         visibility: visible;
-    }
-
-    #crossdiv{
     }
 
     #anchor{

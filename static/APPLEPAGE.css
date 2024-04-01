@@ -1,27 +1,27 @@
-.prodivele{
+.prodivelem{
     width: 100%;
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.prodivele>h1{
+.prodivelem>h1{
     text-align: center;
 }
 
-.proimg{
+.proimage{
     width: 300px;
     height: 400px;
 }
 
-.proinfo{
+.proinfom{
     width: 500px;
     height: 500px;
     padding: 80px;
 }
 
-@media only screen and (max-width:360px){
-    .prodivele{
+@media only screen and (min-width:0px) and (max-width:360px){
+    .prodivelem{
         width: 100%;
         height: 100vh;
         position: relative;
@@ -32,28 +32,28 @@
         justify-content: center;
         align-items: center;
     }
-    .prodivele>h1{
+    .prodivelem>h1{
         text-align: center;
     }
     
-    .proimg{
+    .proimage{
         width: 100px;
         height: 200px;
     }
     
-    .proinfo{
+    .proinfom{
         width: 300px;
         height: auto;
         padding: 0px;
     }
 
-    .proinfo>h5{
+    .proinfom>h5{
         font-size: 15px;
     }
 }
 
-@media only screen and (max-width:425px){
-    .prodivele{
+@media only screen and (min-width:366px) and (max-width:425px){
+    .prodivelem{
         width: 100%;
         height: 100vh;
         position: relative;
@@ -64,22 +64,55 @@
         justify-content: center;
         align-items: center;
     }
-    .prodivele>h1{
+    .prodivelem>h1{
         text-align: center;
     }
     
-    .proimg{
+    .proimage{
         width: 150px;
         height: 250px;
     }
     
-    .proinfo{
+    .proinfom{
         width: 300px;
         height: auto;
         padding: 0px;
     }
 
-    .proinfo>h5{
+    .proinfom>h5{
         font-size: 17px;
+    }
+}
+
+
+@media only screen and (min-width:425px) and (max-width:768px){
+    .prodivelem{
+        width: 100%;
+        height: 100vh;
+        position: relative;
+        top: 70px;
+        /* background-color: yellowgreen; */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .prodivelem>h1{
+        text-align: center;
+    }
+    
+    .proimage{
+        width: 150px;
+        height: 250px;
+    }
+    
+    .proinfom{
+        width: 400px;
+        height: auto;
+        padding: 0px;
+    }
+
+    .proinfom>h5{
+        font-size: 20px;
     }
 }

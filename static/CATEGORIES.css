@@ -52,7 +52,7 @@
     width: fit-content;
 }
 
-#totalc1, #totalc12, #totalc13, #totalc14, #totalc15{
+#totalcd1, #totalcd12, #totalcd13, #totalcd14, #totalcd15{
     width: 100%;
     height: auto;
     padding: 150px;
@@ -62,11 +62,11 @@
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr;
     row-gap: 10px;
-    
+    column-gap: 10px;
 }
 
 
-@media only screen and (max-width:360px){
+@media only screen and (min-width:0px) and (max-width:365px){
     #cate{
         width: 100%;
         height: 10vh;
@@ -85,7 +85,7 @@
         height: 50px;
         /* background-color: rgba(153, 205, 50, 0.93); */
         border-radius: 50%;
-        padding: 5px;
+        padding: 10px;
         z-index: 1;
         display: flex;
         justify-content: center;
@@ -120,7 +120,7 @@
         width: fit-content;
     }
     
-    #totalc1, #totalc12, #totalc13, #totalc14, #totalc15{
+    #totalcd1, #totalcd12, #totalcd13, #totalcd14, #totalcd15{
         width: 100%;
         height: auto;
         padding: 150px;
@@ -136,7 +136,7 @@
 }
 
 
-@media only screen and (max-width:425px){
+@media only screen and (min-width:365px) and (max-width:425px){
     #cate{
         width: 100%;
         height: 10vh;
@@ -190,7 +190,7 @@
         width: fit-content;
     }
     
-    #totalc1, #totalc12, #totalc13, #totalc14, #totalc15{
+    #totalcd1, #totalcd12, #totalcd13, #totalcd14, #totalcd15{
         width: 100%;
         height: auto;
         padding: 150px;
@@ -206,7 +206,7 @@
 }
 
 
-@media only screen and (max-width:768px){
+@media only screen and (min-width:425px) and (max-width:768px){
     #cate{
         width: 100%;
         height: 10vh;
@@ -239,8 +239,8 @@
     }
     
     .cards1{
-        width: 250px;
-        height: 300px;
+        width: 100%;
+        height: 100%;
         border: solid 1px black;
         padding: 10px;
         border-radius: 20px;
@@ -252,25 +252,26 @@
     }
     
     .cards1 img{
-        width: 100px;
-        height: 130px;
+        width: 80px;
+        height: 110px;
     }
     
     #imgcard,#img2ele, #img3ele, #img4ele, #img5ele{
         width: fit-content;
     }
     
-    #totalc1, #totalc12, #totalc13, #totalc14, #totalc15{
+    #totalcd1, #totalcd12, #totalcd13, #totalcd14, #totalcd15{
         width: 100%;
         height: auto;
-        padding: 120px 100px;
+        padding: 120px 5px;
         position: relative;
         top: 80px;
         display: grid;
         grid-template-columns: 1fr 1fr;
         grid-template-rows: 1fr 1fr 1fr;
         row-gap: 10px;
-        
+        column-gap: 10px;
+
     }
     
 }

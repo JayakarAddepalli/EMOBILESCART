@@ -92,7 +92,7 @@
 
 /* ==================================================== */
 
-@media only screen and (max-width:360px){
+@media only screen and (max-width:365px){
     .cartitemsdiv{
         width: 100%;
         height: auto;
@@ -216,7 +216,7 @@
 }
 
 
-@media only screen and (max-width:425px){
+@media only screen and (min-width:365px) and (max-width:425px){
     .cartitemsdiv{
         width: 100%;
         height: auto;
@@ -340,11 +340,11 @@
 }
 
 
-@media only screen and (max-width:768px){
+@media only screen and (min-width:425px) and (max-width:768px){
     .cartitemsdiv{
         width: 100%;
         height: auto;
-        padding: 0px;
+        padding: 20px;
         margin-bottom: 90px;
         display: flex;
         justify-content: space-evenly;
@@ -353,7 +353,7 @@
     }
     
     .divnames{
-        width: 60%;
+        width: 100%;
         height: 100px;
         padding: 0px 0px 0px 10px;
         display: flex;
@@ -426,7 +426,7 @@
     }
 
     .totalpri{
-        width: 600px;
+        width: 100%;
         height: auto;
     }
     

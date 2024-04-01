@@ -40,7 +40,7 @@
     padding: 30px;
 }
 
-#trendingblock{
+#trendingblocks{
     width: 100%;
     height: auto;
     background-color: black;
@@ -51,7 +51,7 @@
     border-radius: 20px;
 }
 
-#trendingblock>div+div{
+#trendingblocks>div+div{
     width: 400px;
     height: 100px;
     /* background-color: rgb(224, 255, 163); */
@@ -189,7 +189,7 @@
     width: fit-content;
 }
 
-@media only screen and (max-width:365px){
+@media only screen and (min-width:0px) and (max-width:365px){
     #mainhead{
         width: 100%;
         height: 100vh;
@@ -225,7 +225,7 @@
         padding: 0px;
     }
     
-    #trendingblock{
+    #trendingblocks{
         width: 300px;
         height: 300px;
         background-color: black;
@@ -239,7 +239,7 @@
         left: 30px;
     }
     
-    #trendingblock>div+div{
+    #trendingblocks>div+div{
         width: 200px;
         height: 200px;
         padding: 0px;
@@ -247,7 +247,7 @@
         /* background-color: rgb(224, 255, 163); */
     }
 
-    #trendingblock>div+div>h2, #trendingblock>div+div>h3{
+    #trendingblocks>div+div>h2, #trendingblocks>div+div>h3{
         font-size: 20px !important;
     }
 
@@ -303,10 +303,7 @@
         width: 150px;
         height: 150px;
     }
-    
-    #Eheading{
-        /* background-color: rgb(158, 158, 114); */
-    }
+
     
     .couhead{
         font-size: 35px;
@@ -402,7 +399,7 @@
     }
 }
 
-@media only screen and (max-width:425px){
+@media only screen and (min-width:365px) and (max-width:425px){
     #mainhead{
         width: 100%;
         height: 100vh;
@@ -438,7 +435,7 @@
         padding: 0px;
     }
     
-    #trendingblock{
+    #trendingblocks{
         width: 300px;
         height: 300px;
         background-color: black;
@@ -452,7 +449,7 @@
         left: 65px;
     }
     
-    #trendingblock>div+div{
+    #trendingblocks>div+div{
         width: 200px;
         height: 200px;
         padding: 0px;
@@ -460,7 +457,7 @@
         /* background-color: rgb(224, 255, 163); */
     }
 
-    #trendingblock>div+div>h2, #trendingblock>div+div>h3{
+    #trendingblocks>div+div>h2, #trendingblocks>div+div>h3{
         font-size: 20px !important;
     }
 
@@ -516,10 +513,7 @@
         width: 150px;
         height: 150px;
     }
-    
-    #Eheading{
-        /* background-color: rgb(158, 158, 114); */
-    }
+
     
     .couhead{
         font-size: 40px;
@@ -616,7 +610,7 @@
 }
 
 
-@media only screen and (max-width:768px){
+@media only screen and (min-width:425px) and (max-width:768px){
     #mainhead{
         width: 100%;
         height: 100vh;
@@ -652,7 +646,7 @@
         padding: 0px;
     }
     
-    #trendingblock{
+    #trendingblocks{
         width: 300px;
         height: 300px;
         background-color: black;
@@ -663,10 +657,10 @@
         border: solid 1px black;
         border-radius: 50%;
         position: relative;
-        left: 65px;
+        left: 80px;
     }
     
-    #trendingblock>div+div{
+    #trendingblocks>div+div{
         width: 200px;
         height: 200px;
         padding: 0px;
@@ -674,7 +668,7 @@
         /* background-color: rgb(224, 255, 163); */
     }
 
-    #trendingblock>div+div>h2, #trendingblock>div+div>h3{
+    #trendingblocks>div+div>h2, #trendingblocks>div+div>h3{
         font-size: 20px !important;
     }
 
@@ -730,11 +724,7 @@
         width: 150px;
         height: 150px;
     }
-    
-    #Eheading{
-        /* background-color: rgb(158, 158, 114); */
-    }
-    
+
     .couhead{
         font-size: 40px;
         font-weight: bold;

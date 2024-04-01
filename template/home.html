@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block head %}
-    <link rel="stylesheet" href="{% static 'home.css' %}">
+    <link rel="stylesheet" href="{% static 'HP.css' %}">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
 {% endblock head %}
@@ -53,7 +53,7 @@
     <h1 class="trendhead">NEWLY LAUNCHED MOBILES</h1><br>
     <div>
         {% for i in d %}
-        <div data-aos="fade-right" data-aos-offset="300" data-aos-easing="ease-in-sine" id="trendingblock">
+        <div data-aos="fade-right" data-aos-offset="300" data-aos-easing="ease-in-sine" id="trendingblocks">
             <div class="trendImg">
                 <a href=""><img src="{{i.Trend1.Image.url}}" alt="trendingimages"></a>
                 <!-- <p>{{i.Image}}</p> -->
@@ -65,7 +65,7 @@
             </div>
         </div><br><br><br><br><br>
 
-        <div data-aos="fade-right" data-aos-offset="300" data-aos-easing="ease-in-sine" id="trendingblock">
+        <div data-aos="fade-right" data-aos-offset="300" data-aos-easing="ease-in-sine" id="trendingblocks">
             <div class="trendImg">
                 <a href=""><img src="{{i.Trend2.Image.url}}" alt="trendingimages"></a>
                 <!-- <p>{{i.Image}}</p> -->
@@ -77,7 +77,7 @@
             </div>
         </div><br><br><br><br><br>
 
-        <div data-aos="fade-right" data-aos-offset="300" data-aos-easing="ease-in-sine" id="trendingblock">
+        <div data-aos="fade-right" data-aos-offset="300" data-aos-easing="ease-in-sine" id="trendingblocks">
             <div class="trendImg">
                 <a href=""><img src="{{i.Trend3.Image.url}}" alt="trendingimages"></a>
                 <!-- <p>{{i.Image}}</p> -->
@@ -89,7 +89,7 @@
             </div>
         </div><br><br><br><br><br>
 
-        <div data-aos="fade-right" data-aos-offset="300" data-aos-easing="ease-in-sine" id="trendingblock">
+        <div data-aos="fade-right" data-aos-offset="300" data-aos-easing="ease-in-sine" id="trendingblocks">
             <div class="trendImg">
                 <a href=""><img src="{{i.Trend4.Image.url}}" alt="trendingimages"></a>
                 <!-- <p>{{i.Image}}</p> -->

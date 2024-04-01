@@ -2,18 +2,18 @@
 {% load static %}
 
 {% block head %}
-<link rel="stylesheet" href="{% static 'APPLEPAG.css' %}">
+<link rel="stylesheet" href="{% static 'APPLEPAGE.css' %}">
 
 
 {% endblock head %}
 
 {% block body %}
-        <div class="prodivele">
+        <div class="prodivelem">
             {% for i in products %}
-                <div class="proimg">
+                <div class="proimage">
                     <img src="{{i.Image.url}}" alt="">
                 </div>
-                <div class="proinfo">
+                <div class="proinfom">
                     <h1>{{i.Name}}</h1><br><br>
                     <h5>{{i.Info}}</h5><br>
                     <h5><b>{{i.Cost}}/- Rs</b></h5>
