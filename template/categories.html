@@ -27,6 +27,13 @@
     </a>
 
 </div>
+{% if messages %}
+    {% for i in messages %}
+        <div class="alert alert-danger">
+            {{i}}
+        </div>
+    {% endfor %}
+{% endif %}
 
 <div id="totalcd1">
     {% for i in ad %}

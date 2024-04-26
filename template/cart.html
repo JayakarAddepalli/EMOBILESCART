@@ -169,14 +169,10 @@
                         
                         <div class="mb-4 d-flex justify-content-start align-items-center">
                             <label for="pm" class="form-label" style="width: 200px;">Payment mode</label>
-                            <div class="w-50 d-flex justify-content-start align-items-center">
-                                <input type="radio" name="PaymentMode" id="pm" value="COD">
-                                <label for="pm" class="form-label">COD</label>
-                            </div>   
-                            <div class="w-50 d-flex justify-content-start align-items-center">
-                                <input type="radio" name="PaymentMode" id="pm2" value="UPI">
-                                <label for="pm2" class="form-label">UPI</label>
-                            </div>
+                            <select name="PaymentMode" id="pm" class="form-control" style="width: 250px;">
+                                <option value="UPI">UPI</option>
+                                <option value="COD">COD</option>
+                            </select>
                             
                         </div>
     
@@ -193,7 +189,7 @@
                     </div>
                     
                     <div class="mt-2">
-                        <a href="{% url 'APP:paymentsuccessfull' %}"><button type="submit" class="btn btn-success">Place Order</button></a>
+                        <a href="{% url 'APP:paymentsuccessfull' %}"><input type="button" class="btn btn-success" value="Place Order"></a>
                     </div>
                 </form>
             </div>

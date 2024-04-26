@@ -7,7 +7,7 @@ from django.contrib.auth.hashers import make_password
 class Register(forms.ModelForm):
     class Meta:
         model = User
-        fields = ['username', 'first_name', 'last_name', 'password']
+        fields = ['username', 'first_name', 'last_name','email', 'password']
 
     def save(self):
         s = super().save(commit=False)
@@ -24,4 +24,7 @@ class PaymentForm(forms.ModelForm):
         model = PaymentModel
         fields = '__all__'
         exclude = ['date_added']
+
+class OTP_generation(forms.Form):
+    Email = forms.EmailField()
         

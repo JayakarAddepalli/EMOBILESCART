@@ -141,4 +141,16 @@ class PaymentModel(models.Model):
     PhNo = models.IntegerField()
     Address = models.TextField()
     PinCode = models.IntegerField()
+    PaymentMode = models.CharField(max_length=10, default=0)
     date_added = models.DateTimeField(auto_now_add=True)
+
+
+# FOR Phone model
+
+class PhoneModel(models.Model):
+    Mobile = models.IntegerField(blank = False)
+    Verified = models.BooleanField(blank=False, default=False)
+    counter = models.IntegerField(default=0, blank=False)
+
+    def __str__(self):
+        return str(self.Mobile)

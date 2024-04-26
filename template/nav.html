@@ -19,6 +19,54 @@
     
     {% endblock head %}
 
+    <style>
+
+        body{
+            cursor: none;
+        }
+
+        body:hover #mousecursor{
+            opacity: 1;
+        }
+
+        
+        
+        #mousecursor{
+            width: 20px;
+            height: 20px;
+            background-color: #1D63FF;
+            border: solid 1px rgba(0, 38, 255, 0);
+            border-radius: 50%;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            z-index: 1;
+            /* box-shadow: 0px 0px 25px blue; */
+            opacity: 0;
+            cursor: none default;
+            animation: animate 2s infinite;
+            animation-timing-function: ease-in-out;
+        }
+        
+        /* @keyframes animate{
+            0%{
+                transform: scale(1);
+            }
+            100%{
+                transform: scale(2);
+            }
+        } */
+
+        a:hover{
+            cursor: none;
+        }
+/* 
+        #logoimg:hover ~ #mousecursor, #homeanchor1~#mousecursor{
+            width: 100px;
+            height: 100px;
+        } */
+
+    </style>
 </head>
 <body>
     <header>
@@ -38,8 +86,12 @@
                 <a href="{% url 'APP:viewcart' %}" id="cartanchor">CART</a>
                 <a href="{% url 'APP:user' %}" id="useranchorlink">USER</a>
             </div>
+            <div id="mousecursor">
+            
+            </div>
         </nav>
     </header>
+
     <body>
         <!-- <div id="curserpointer1" style="width: 50px; height: 50px; border: solid 2px rgb(255, 255, 255); z-index: 2; box-shadow: 0px 0px 25px white; display: flex; justify-content: center; align-items: center;">
             <div style="width: 10px; height: 10px; background-color: rgba(0, 0, 0, 0);" id="curserdot">
@@ -68,13 +120,30 @@
                     <li><a href="">Sales</a></li>
                 </ul>
             </div>
+
         </footer>
+
+        
+
+
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
         <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
         <script>
             AOS.init();
         </script>
         <script src="{% static 'nav.js' %}"></script>
+        <script>
+            let mousecursor = document.getElementById('mousecursor');
+
+            window.addEventListener('mousemove', (e)=>{
+                mousecursor.style.top = e.clientY 
+                mousecursor.style.left = e.clientX 
+            })
+
+            window.addEventListener('click',(e)=>{
+                
+            })
+        </script>
 
         <!-- <script>
             let pos = document.getElementById('curserpointer1');

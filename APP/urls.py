@@ -14,6 +14,10 @@ urlpatterns = [
     path('checkpayment/', successviewcheck, name='paymentsuccessfull'),
     path('successpage/', successpageview, name='successpage'),
 
+    path('forgotpassword/', ForgotPassWordView, name='Forgotpassword'),
+    path('otp_confirm/', OTP_verfication, name='otp_confirm'),
+    path('success/',successView, name='success'),
+
     
     path('buynow/<int:id>',APPLEBUYNOWVIEW, name='buynow'),
     path('addtocart/<slug>/<int:id>', addtocartview, name='addtocart'),

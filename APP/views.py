@@ -1,5 +1,5 @@
 from django.shortcuts import render
-
+from EMOBILESCART import settings
 # Create your views here.
 from django.shortcuts import render, redirect
 from django.urls import reverse
@@ -9,6 +9,13 @@ from django.contrib import messages
 from django.contrib.auth import authenticate,login, logout
 from django.contrib.auth.decorators import login_required
 
+from django.core.mail import BadHeaderError, send_mail
+import random
+from django.contrib.auth.hashers import check_password #to get the decrypted password
+
+
+#check_password----> to get the decrypted password to check it
+
 # Create your views here.
 
 @login_required(login_url='APP:login')
@@ -16,18 +23,122 @@ def HomeView(request):
     data = Trends.objects.all()
     return render(request, 'home.html', {'d':data})
 
+# ######################################     OTP VERIFICATION      ###################################
+
+otp_confirm=None
+
+def ForgotPassWordView(request):
+    global otp_confirm
+    if request.method == 'POST':
+        
+
+        user = User.objects.filter(email = request.POST['email'])
+
+        
+        if user.exists():
+            
+            otp = random.randint(000000, 999999)
+            otp_confirm = otp #-------- One time password which will work only one time
+
+            
+            subject = 'To Modify Password'
+            mesg = f'OTP FOR PASSWORD RESET: {otp_confirm}'
+
+            send_mail(subject=subject, message=mesg, from_email=settings.EMAIL_HOST_USER, recipient_list=[request.POST['email']])
+            return redirect(reverse('APP:otp_confirm'))
+
+        else:
+            messages.error(request, 'Email was not registered')
+            return render(request, 'forgotpassword.html')
+            
+
+    return render(request, 'forgotpassword.html')
+
+
+def OTP_verfication(request):
+    if request.method == 'POST':
+        otp = request.POST['OTP']
+
+        # print(otp_confirm) #-------- One time password which will work only one time
+        
+        if str(otp) == str(otp_confirm):
+            return redirect(reverse('APP:success'))
+
+        messages.error(request, 'Invaild OTP')
+
+
+    return render(request, 'otp_verfication.html')
+
+
+def successView(request):
+
+    if request.method == 'POST':
+        email = request.POST['email']
+        # print(email)
+        # print(type(email))
+        newpassword = request.POST['newpassword']
+        reenterpassword = request.POST['reenterpassword']
+
+        user = User.objects.filter(email = email)
+        # print(user)
+        # print()
+        # print('*')
+        if user:
+            if not check_password(newpassword, user[0].password): #checks wheather the newpassword is equal or not eaqual to old password.
+                if newpassword == reenterpassword:
+                    
+                    # print(user[0].password) #pbkdf2_sha256$720000$Z62oBqR6cV0RNOJ9LyxnBA$Vr2IUMNH8STk31Zit2AqKA0vjEQ1nqenkU8Q8Pphsgo=
+                    # print(check_password(newpassword, user[0].password)) #False
+                    
+                    # print(user[0].password) ----> old password haser= pbkdf2_sha256$720000$Z62oBqR6cV0RNOJ9LyxnBA$Vr2IUMNH8STk31Zit2AqKA0vjEQ1nqenkU8Q8Pphsgo=
+                    NP = make_password(newpassword)
+
+                    user[0].password = NP
+
+                    # print('*'*10)
+                    # print(user[0].password) ---> new hased password = pbkdf2_sha256$720000$z8xG1SUl7DKCLBvg2WLG9j$kjPxwEYLDUr3DzZIbpuNjUmqzoeCIL3MWxykP56Y4x4=
+                    
+                    user[0].save() #To save the password.
+
+                    # To send the password changed successfully to mail
+
+                    subject = 'Password Changed successfully'
+                    meg = f'{user[0].username} your password has been changed successfully'
+                    send_mail(subject=subject, message=meg, from_email=settings.EMAIL_HOST_USER, recipient_list=[user[0].email])
+
+                    return redirect(reverse('APP:login'))
+            
+                else:
+                    messages.error(request, 'Password not matched!')
+            else:
+                messages.error(request, 'Please chose a different password!')
+        else:
+            messages.error(request, 'Invalid email!')        
+
+
+    return render(request, 'success.html')
+
+
+# #########################################################################
 
 
 def RegisterView(request):
     if request.method == 'POST':
         user = User.objects.filter(username = request.POST['username'])
         if user.exists():
-            messages.info(request, 'username already exist')
+            messages.info(request, 'user already exist')
             return redirect(reverse('APP:register'))
         
         form = Register(request.POST)
         if form.is_valid():
             form.save()
+            
+            u = form.cleaned_data['username']
+            email = form.cleaned_data['email']
+            subject = 'Registered Successfully for E-MobileCart'
+            msg = f'Hi {u} , your Account has been created for E-MOBILECART. Enjoy Shopping'
+
+            send_mail(subject=subject, message=msg, from_email=settings.EMAIL_HOST_USER, recipient_list=[email] )
             return redirect(reverse('APP:login'))
         
     form = Register()
@@ -38,12 +149,21 @@ def CusLoginView(request):
         f = Login(request.POST)
         if f.is_valid():
             user = authenticate(username = f.cleaned_data['username'], password = f.cleaned_data['password'])
+            
+            u = f.cleaned_data['username']
+            subject = 'Logined successfully'
+            mesg = f'Nice to see you {u}.'
+            
             if user:
                 login(request, user)
+                
+                send_mail(subject=subject, message=mesg, from_email=settings.EMAIL_HOST_USER, recipient_list=[user.email])
+                
                 return render(request, 'home.html', {'u':user})
             else:
                 messages.info(request, 'invalid username or password')
                 return redirect(reverse('APP:login'))
+            
     f = Login()
     return render(request, 'login.html', {'f':f})
 
@@ -138,26 +258,27 @@ def viewcart(request):
 
     totalprize = applesum + oneplussum + samsungsum + redmisum + realmesum
 
-    if(request.method == 'POST'):
-        form = PaymentForm(request.POST)
-        if form.is_valid():
-            form.save(commit=True)
-    form = PaymentForm()
+    # if(request.method == 'POST'):
+    #     form = PaymentForm(request.POST)
+    #     if form.is_valid():
+    #         form.save(commit=True)
+    #         return redirect(reverse('APP:successpage'))
+    # form = PaymentForm()
 
-    return render(request, 'cart.html', {'form':form, 'cartitems':cartitems, 'onepluscartitem':onepluscartitem, 'samsungcartitem':samsungcartitem, 'redmicartitem':redmicartitem, 'realmecartitem':realmecartitem, 'appletotalprize':applesum, 'oneplustotalprize':oneplussum, 'samsungtotalprize':samsungsum, 'redmitotalprize':redmisum, 'realmetotalprize':realmesum, 'totalprize':totalprize})
+    return render(request, 'cart.html', {'cartitems':cartitems, 'onepluscartitem':onepluscartitem, 'samsungcartitem':samsungcartitem, 'redmicartitem':redmicartitem, 'realmecartitem':realmecartitem, 'appletotalprize':applesum, 'oneplustotalprize':oneplussum, 'samsungtotalprize':samsungsum, 'redmitotalprize':redmisum, 'realmetotalprize':realmesum, 'totalprize':totalprize})
 
 @login_required(login_url='APP:login')
 def successviewcheck(request):
     if(request.method == 'POST'):
         form = PaymentForm(request.POST)
-        if form:
-            if form.is_valid():
-                form.save(commit=True)
-                return redirect(reverse('APP:successpage'))
+        if form.is_valid():
+            form.save(commit=True)
+            return redirect(reverse('APP:successpage'))
         else:
             return redirect(reverse('APP:viewcart'))
 
     form = PaymentForm()
+    # return redirect(reverse('APP:successpage'))
     return render(request, 'cart.html', {'f':form})
    
 
