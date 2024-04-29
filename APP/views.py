@@ -11,7 +11,7 @@ from django.contrib.auth.decorators import login_required
 
 from django.core.mail import BadHeaderError, send_mail
 import random
-from django.contrib.auth.hashers import check_password #to get the decrypted password
+from django.contrib.auth.hashers import check_password #to check the decrypted password with the newpassword
 
 
 #check_password----> to get the decrypted password to check it
@@ -240,6 +240,8 @@ def REALMEBUYNOWVIEW(request, id):
 
 @login_required(login_url='APP:login')
 def viewcart(request):
+    # print(request.POST)
+
     cartitems = CartItem.objects.filter(user = request.user)
     applesum = sum(item.appleproduct.Cost * item.quantity for item in cartitems)
 
@@ -258,28 +260,81 @@ def viewcart(request):
 
     totalprize = applesum + oneplussum + samsungsum + redmisum + realmesum
 
-    # if(request.method == 'POST'):
-    #     form = PaymentForm(request.POST)
-    #     if form.is_valid():
-    #         form.save(commit=True)
-    #         return redirect(reverse('APP:successpage'))
-    # form = PaymentForm()
+    if request.method == 'POST':
+        email = request.POST['email']
+        user = User.objects.filter(email= email)
+
+        # print(user[0].email)
+        if user.exists():
+            mobile = request.POST['PhNo']
+            pincode = request.POST['PinCode']
+
+            paymentMode = request.POST['PaymentMode']
+
+            
+            if len(mobile) == 10 and len(pincode) == 6:    
+                
+                applecartdata = CartItem.objects.all()
+                onepluscartdata = OneplusCartItem.objects.all()
+                realmecartdata = RealmeCartItem.objects.all()
+                readmicartdata = RedmiCartItem.objects.all()
+                samsungcartdata = SamsungCartItem.objects.all()
+
+                subject = 'Your order are placed successfully'
+                
+                applemess = []
+                oneplusmess = []
+                realmemess = []
+                readmimes = []
+                samsungmess = []
+
+
+                for i1 in range(len(applecartdata)):
+                        applemess += f'apple mobile {i1+1} : {applecartdata[i1].appleproduct} * {applecartdata[i1].quantity} \n'
+                
+                for i2 in range(len(onepluscartdata)):
+                        oneplusmess += f'oneplus mobile {i2+1} : {onepluscartdata[i2].oneplusproduct} * {onepluscartdata[i2].quantity} \n'
+
+                for i3 in range(len(realmecartdata)):
+                        realmemess += f'realme mobile {i3+1} : {realmecartdata[i3].realmeproduct} * {realmecartdata[i3].quantity} \n'
+                    
+                for i4 in range(len(readmicartdata)):
+                        readmimes +=  f'redmi mobile {i4+1} : {readmicartdata[i4].redmiproduct} * {readmicartdata[i4].quantity} \n'
+                    
+                for i5 in range(len(samsungcartdata)):
+                        samsungmess += f'samsung mobile {i5+1} : {samsungcartdata[i5].samsungproduct} * {samsungcartdata[i5].quantity} \n'  
+
+                
+                
+                apples_res = filter((lambda i :i if len(i)!=0 else ''), applemess)
+                oneplus_res = filter((lambda i :i if len(i)!=0 else ''), oneplusmess)
+                realme_res = filter((lambda i :i if len(i)!=0 else ''), realmemess)
+                readmi_res = filter((lambda i :i if len(i)!=0 else ''), readmimes)
+                samsung_res = filter((lambda i :i if len(i)!=0 else ''), samsungmess)
+
+                mess = ''.join(list(apples_res)) + '' + ''.join(list(oneplus_res)) + '' + ''.join(list(realme_res)) + '' + ''.join(list(readmi_res)) + '' + ''.join(list(samsung_res)) + '\n Total ammount: ' + str(totalprize) + '-/Rs'
+                if mess:
+
+                    send_mail(subject=subject, message=mess, from_email=settings.EMAIL_HOST_USER, recipient_list=[user[0].email])
+                    
+                    for j in (applecartdata, onepluscartdata, realmecartdata, readmicartdata, samsungcartdata):
+                        for i in j:
+                            i.delete()
+
+                    return redirect(reverse('APP:successpage'))
+                
+                else:
+                    messages.error(request, 'Your cart is empty!')
+            else:
+                messages.error(request, 'Invaild Mobile No.. or Pincode!')
+
+        else:
+            messages.error(request, 'The email is not registered!')        
+                
+                
+                
 
     return render(request, 'cart.html', {'cartitems':cartitems, 'onepluscartitem':onepluscartitem, 'samsungcartitem':samsungcartitem, 'redmicartitem':redmicartitem, 'realmecartitem':realmecartitem, 'appletotalprize':applesum, 'oneplustotalprize':oneplussum, 'samsungtotalprize':samsungsum, 'redmitotalprize':redmisum, 'realmetotalprize':realmesum, 'totalprize':totalprize})
-
-@login_required(login_url='APP:login')
-def successviewcheck(request):
-    if(request.method == 'POST'):
-        form = PaymentForm(request.POST)
-        if form.is_valid():
-            form.save(commit=True)
-            return redirect(reverse('APP:successpage'))
-        else:
-            return redirect(reverse('APP:viewcart'))
-
-    form = PaymentForm()
-    # return redirect(reverse('APP:successpage'))
-    return render(request, 'cart.html', {'f':form})
    
 
 @login_required(login_url='APP:login')
@@ -294,6 +349,7 @@ def addtocartview(request, slug=None, id=None):
     cartitem.quantity += 1
     cartitem.save()
     
+    messages.success(request, 'Item added successfully')
 
     return redirect(reverse('AppleApp:categories'))
 
@@ -328,6 +384,8 @@ def oneplusaddtocartview(request, slug=None, id=None):
     cartitem.quantity += 1
     cartitem.save()
 
+    messages.success(request, 'Item added successfully')
+    
     return redirect(reverse('OneplusAPP:Onepluscategories'))
 
 
@@ -363,6 +421,8 @@ def samsungaddtocartview(request, slug=None, id=None):
     cartitem, created = SamsungCartItem.objects.get_or_create(samsungproduct = samsungproduct, user = request.user)
     cartitem.quantity += 1
     cartitem.save()
+
+    messages.success(request, 'Item added successfully')
 
     return redirect(reverse('SamsungApp:samsungcategories'))
 
@@ -401,6 +461,8 @@ def redmiaddtocartview(request, slug=None, id=None):
     cartitem.quantity += 1
     cartitem.save()
 
+    messages.success(request, 'Item added successfully')
+
     return redirect(reverse('RedmiApp:redmicategories'))
 
 
@@ -437,6 +499,8 @@ def realmeaddtocartview(request, slug=None, id=None):
     cartitem, created = RealmeCartItem.objects.get_or_create(realmeproduct = realmeproduct, user = request.user)
     cartitem.quantity += 1
     cartitem.save()
+
+    messages.success(request, 'Item added successfully')
 
     return redirect(reverse('RealmeApp:realmecategories'))
 

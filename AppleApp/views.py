@@ -10,7 +10,6 @@ from django.contrib import messages
 @login_required(login_url='APP:login')
 def CategoriesView(request):
     appledata = Apple.objects.all()
-    messages.info(request, 'item added')
     return render(request, 'categories.html', {'ad': appledata})
 
 def CategoriesViewItem(request, slug):

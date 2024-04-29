@@ -11,7 +11,6 @@ urlpatterns = [
     path('user/', UserView, name='user'),
     path('logout/', CusLogoutView, name='logout'),
     path('cart/', viewcart, name='viewcart'),
-    path('checkpayment/', successviewcheck, name='paymentsuccessfull'),
     path('successpage/', successpageview, name='successpage'),
 
     path('forgotpassword/', ForgotPassWordView, name='Forgotpassword'),

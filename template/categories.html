@@ -4,7 +4,21 @@
 
 {% block head %}
 <link rel="stylesheet" href="{% static 'CATEGORIES.css' %}">
+<style>
+    .cartmess{
+        position: relative; 
+        top: 200px;
+        left: 168px;
+    }
 
+    @media only screen and (min-width:0px) and (max-width:365px){
+        .cartmess{
+        position: relative; 
+        top: 200px;
+        left: 50px;
+    }
+    }
+</style>
 {% endblock head %}
 
 {% block body %}
@@ -27,22 +41,25 @@
     </a>
 
 </div>
-{% if messages %}
-    {% for i in messages %}
-        <div class="alert alert-danger">
-            {{i}}
-        </div>
-    {% endfor %}
-{% endif %}
+
+{% for i in messages %}
+<div class="w-75 alert alert-success alert-dismissible fade show cartmess">
+    {{i}}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endfor %}
 
 <div id="totalcd1">
+    
     {% for i in ad %}
         {% if i.id != 1 %}
         
-        <div class="cards1">
+        <div class="cards1" style="position: relative;">
             <!-- {{i.slug}} -->
             <div id="imgcard">
                 <a href="{% url 'AppleApp:applepro' i.slug %}"><img src="{{i.Image.url}}" alt="apple"></a>
+                {% if i.id == 4 %}<span class="badge text-bg-primary" style="width: 35px; height: 15px; font-size: 10px; font-weight: lighter; position: absolute;  right: 10px; top: 10px;">NEW</span>
+                {% elif i.id == 7 %}<span class="badge text-bg-primary" style="width: 35px; height: 15px; font-size: 10px; font-weight: lighter; position: absolute;  right: 10px; top: 10px;">NEW</span>{% endif %}
             </div>
             <div>
                 <h5 style="text-align: center;">{{i.Name}}</h5>
@@ -50,7 +67,7 @@
                 <!-- <p>{{i.Image}}</p> -->
             </div>
             <div style="display: flex; justify-content: space-evenly; align-items: center;">
-                <a href="{% url 'APP:addtocart' i.slug i.id %}" class="btn btn-warning w-auto " id="cartbtn" style="font-size: 12px;">ADD TO CART</a>
+                <a href="{% url 'APP:addtocart' i.slug i.id %}" class="btn btn-warning w-auto applebtn" id="cartbtn" style="font-size: 12px;">ADD TO CART</a>
                 <a href="{% url 'APP:buynow' i.id %}" class="btn btn-primary w-auto" style="font-size: 12px;">BUY NOW</a>
             </div>
         </div>
@@ -60,5 +77,17 @@
 
 
 <script src="{% static 'catnav.js' %}"></script>
+<script>
+    // let cards1 = document.getElementsByClassName('cards1')[0];
+    // cards1.addEventListener('mouseenter',()=>{
+    //     cards1.style.borderColor = 'blue'
+
+    // })
+
+    // cards1.addEventListener('mouseleave',()=>{
+    //     cards1.style.borderColor = 'black'
+
+    // })
+</script>
 
 {% endblock body %}

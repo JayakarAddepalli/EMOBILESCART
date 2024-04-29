@@ -4,7 +4,21 @@
 
 {% block head %}
 <link rel="stylesheet" href="{% static 'CATEGORIES.css' %}">
+<style>
+    .cartmess{
+        position: relative; 
+        top: 200px;
+        left: 168px;
+    }
 
+    @media only screen and (min-width:0px) and (max-width:365px){
+        .cartmess{
+        position: relative; 
+        top: 200px;
+        left: 50px;
+    }
+    }
+</style>
 {% endblock head %}
 
 {% block body %}
@@ -28,13 +42,24 @@
 
 </div>
 
+{% for i in messages %}
+<div class="cartmess w-75 alert alert-success alert-dismissible fade show">
+    {{i}}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endfor %} 
+
 
 <div id="totalcd14">
     {% for i in rd %}
         {% if i.id != 1 %}
-        <div class="cards1">
+        <div class="cards1" style="position: relative;">
             <div id="img4ele">
                 <a href="{% url 'RedmiApp:redmipro' i.slug %}"><img src="{{i.Image.url}}" alt="redmi"></a>
+                {% if i.id == 3 %}<span class="badge text-bg-primary" style="width: 35px; height: 15px; font-size: 10px; font-weight: lighter; position: absolute;  right: 10px; top: 10px;">NEW</span>
+                {% elif i.id == 4 %}<span class="badge text-bg-primary" style="width: 35px; height: 15px; font-size: 10px; font-weight: lighter; position: absolute;  right: 10px; top: 10px;">NEW</span>
+                {% elif i.id == 6 %}<span class="badge text-bg-primary" style="width: 35px; height: 15px; font-size: 10px; font-weight: lighter; position: absolute;  right: 10px; top: 10px;">NEW</span>{% endif %}
+                
             </div>
             <div>
                 <h5 style="text-align: center;">{{i.Name}}</h5>
