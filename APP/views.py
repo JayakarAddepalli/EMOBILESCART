@@ -121,28 +121,154 @@ def successView(request):
 
 # #########################################################################
 
-
 def RegisterView(request):
-    if request.method == 'POST':
-        user = User.objects.filter(username = request.POST['username'])
-        if user.exists():
-            messages.info(request, 'user already exist')
-            return redirect(reverse('APP:register'))
-        
-        form = Register(request.POST)
-        if form.is_valid():
-            form.save()
-            
-            u = form.cleaned_data['username']
-            email = form.cleaned_data['email']
-            subject = 'Registered Successfully for E-MobileCart'
-            msg = f'Hi {u} , your Account has been created for E-MOBILECART. Enjoy Shopping'
+    if request.method == "POST":
+        if "send_otp" in request.POST:
 
-            send_mail(subject=subject, message=msg, from_email=settings.EMAIL_HOST_USER, recipient_list=[email] )
-            return redirect(reverse('APP:login'))
-        
-    form = Register()
-    return render(request, 'register.html', {'f':form})
+            email = request.POST.get("email")
+
+            useremail = User.objects.filter(email=email).exists()
+
+            if useremail:
+                return render(request, "register.html", {"error": "This email is already registered. Kindly use another email!"})
+            
+            
+            username = request.POST.get("username")
+            firstname = request.POST.get("first_name")
+            lastname = request.POST.get("last_name")
+
+
+            if not email:
+                return render(request, "register.html", {"error": "Email is required"})
+
+            otp = random.randint(100000, 999999)  # Generate a 6-digit OTP
+            request.session["username"] = username  
+            request.session["first_name"] = firstname
+            request.session["last_name"] = lastname
+            request.session["email_otp"] = otp  # Save OTP in session
+            request.session["otp_email"] = email  
+            request.session["otp_verified"] = False
+            request.session["otp_sent"] = False
+
+            send_mail(
+                subject="Your OTP Code",
+                message=f"Your OTP is {otp}. Do not share it with anyone.",
+                from_email=settings.EMAIL_HOST_USER,
+                recipient_list=[email],
+                fail_silently=False,
+            )
+
+            request.session["otp_sent"] = True
+
+            return render(request, "register.html", {
+                "otp_sent": True, 
+                "message": "OTP sent successfully!", 
+                "email": email,
+                "username": username,
+                "firstname": firstname,
+                "lastname": lastname
+            })
+
+        elif "verify_otp" in request.POST:
+            entered_otp = request.POST.get("emailOTP")
+            stored_otp = request.session.get("email_otp")
+
+            if not entered_otp:
+                return render(request, "register.html", {
+                    "error": "Please enter the OTP", 
+                    "otp_sent": True,
+                    "otp_verified": False,
+                    "email": request.session.get("otp_email"),
+                    "username": request.session.get("username"),
+                    "firstname": request.session.get("first_name"),
+                    "lastname": request.session.get("last_name"),
+                })
+
+            if str(entered_otp) == str(stored_otp):
+                request.session["otp_verified"] = True
+
+                return render(request, "register.html", {
+                    "message": "OTP verified successfully!",
+                    "otp_sent": False,
+                    "otp_verified": True,
+                    "email": request.session.get("otp_email"),
+                    "username": request.session.get("username"),
+                    "firstname": request.session.get("first_name"),
+                    "lastname": request.session.get("last_name"),
+                })
+            else:
+                return render(request, "register.html", {
+                    "error": "Invalid OTP",
+                    "otp_sent": True,
+                    "otp_verified": False,
+                    "email": request.session.get("otp_email"),
+                    "username": request.session.get("username"),
+                    "firstname": request.session.get("first_name"),
+                    "lastname": request.session.get("last_name"),
+                })
+            
+        else:
+            request.session["username"] = request.POST.get("username") 
+            request.session["first_name"] = request.POST.get("first_name")
+            request.session["last_name"] = request.POST.get("last_name")
+            request.session["otp_email"] = request.POST.get("email")
+
+            if not request.session.get("otp_sent"):
+                return render(request, "register.html", {
+                    "error": "Please verify your email before registering.",
+                    "otp_sent": False,
+                    "otp_verified": False,
+                    "email": request.session.get("otp_email"),
+                    "username": request.session.get("username"),
+                    "firstname": request.session.get("first_name"),
+                    "lastname": request.session.get("last_name"),
+                })
+
+            if not request.session.get("otp_verified"):  # Ensure OTP was verified
+                return render(request, "register.html", {
+                    "error": "Please verify your OTP before registering.",
+                    "otp_sent": True,
+                    "otp_verified": False,
+                    "email": request.session.get("otp_email"),
+                    "username": request.session.get("username"),
+                    "firstname": request.session.get("first_name"),
+                    "lastname": request.session.get("last_name"),
+                })
+            
+            user = User.objects.filter(username = request.POST['username'])
+            if user.exists():
+                messages.info(request, 'user already exist')
+                return redirect(reverse('APP:register'))
+                
+            form = Register(request.POST)
+            if form.is_valid():
+                form.save()
+    
+                u = form.cleaned_data['username']
+                email = form.cleaned_data['email']
+                subject = 'Registered Successfully for E-MobileCart'
+                msg = f'Hi {u} , your Account has been created for E-MOBILECART. Enjoy Shopping'
+
+                send_mail(subject=subject, message=msg, from_email=settings.EMAIL_HOST_USER, recipient_list=[email] )
+
+                request.session["first_name"] = ""
+                request.session["last_name"] = ""
+                request.session["username"] = ""
+                request.session["otp_verified"] = False
+                request.session["otp_sent"] = False
+
+                return redirect(reverse('APP:login'))
+                
+            form = Register()
+            return render(request, 'register.html', {'f':form})
+
+    return render(request, "register.html", {
+        "email": request.session.get("otp_email", ""),
+        "username": request.session.get("username", ""),
+        "firstname": request.session.get("first_name", ""),
+        "lastname": request.session.get("last_name", "")
+    })
+
 
 def CusLoginView(request):
     if request.method == 'POST':
@@ -158,8 +284,9 @@ def CusLoginView(request):
                 login(request, user)
                 
                 send_mail(subject=subject, message=mesg, from_email=settings.EMAIL_HOST_USER, recipient_list=[user.email])
-                
-                return render(request, 'home.html', {'u':user})
+                data = Trends.objects.all()
+
+                return render(request, 'home.html', {'u':user, 'd':data})
             else:
                 messages.info(request, 'invalid username or password')
                 return redirect(reverse('APP:login'))
@@ -172,6 +299,7 @@ def UserView(request):
 
 def CusLogoutView(request):
     logout(request)
+    request.session["otp_email"] = ""
     return redirect(reverse('APP:user'))
 
 def APPLEBUYNOWVIEW(request, id):
@@ -260,9 +388,10 @@ def viewcart(request):
 
     totalprize = applesum + oneplussum + samsungsum + redmisum + realmesum
 
+    originalUserEmail = request.session["otp_email"]
     if request.method == 'POST':
-        email = request.POST['email']
-        user = User.objects.filter(email= email)
+        
+        user = User.objects.filter(email= originalUserEmail)
 
         # print(user[0].email)
         if user.exists():
@@ -270,7 +399,6 @@ def viewcart(request):
             pincode = request.POST['PinCode']
 
             paymentMode = request.POST['PaymentMode']
-
             
             if len(mobile) == 10 and len(pincode) == 6:    
                 
@@ -334,7 +462,7 @@ def viewcart(request):
                 
                 
 
-    return render(request, 'cart.html', {'cartitems':cartitems, 'onepluscartitem':onepluscartitem, 'samsungcartitem':samsungcartitem, 'redmicartitem':redmicartitem, 'realmecartitem':realmecartitem, 'appletotalprize':applesum, 'oneplustotalprize':oneplussum, 'samsungtotalprize':samsungsum, 'redmitotalprize':redmisum, 'realmetotalprize':realmesum, 'totalprize':totalprize})
+    return render(request, 'cart.html', {'cartitems':cartitems, 'onepluscartitem':onepluscartitem, 'samsungcartitem':samsungcartitem, 'redmicartitem':redmicartitem, 'realmecartitem':realmecartitem, 'appletotalprize':applesum, 'oneplustotalprize':oneplussum, 'samsungtotalprize':samsungsum, 'redmitotalprize':redmisum, 'realmetotalprize':realmesum, 'totalprize':totalprize, 'originalUserEmail': originalUserEmail})
    
 
 @login_required(login_url='APP:login')

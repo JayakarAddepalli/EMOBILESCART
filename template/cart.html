@@ -213,36 +213,40 @@
 
                     <div class="card card-body h-75 overflow-scroll">
                         <div class="mb-4 d-flex justify-content-start align-items-center">
-                            <label for="fn" class="form-label" style="width: 150px;">Full Name</label>
+                            <label for="fn" class="form-label" style="width: 150px;">Full Name:</label>
                             <input type="text" name="FullName" id="fn" class="form-control" style="width: 300px;">
                         </div>
         
                         <div class="mb-4 d-flex justify-content-start align-items-center">
-                            <label for="e" class="form-label" style="width: 150px;">Email</label>
-                            <input type="email" name="email" id="e" class="form-control" style="width: 300px;">
+                            <label for="e" class="form-label" style="width: 150px;">Email:</label>
+                            <input type="email" name="email" id="e" class="form-control" style="width: 300px;" value="{{originalUserEmail}}" disabled title="Sorry! Updates will be sent only to the registered email.">
                         </div>
     
                         <div class="mb-4 d-flex justify-content-start align-items-center">
-                            <label for="ph" class="form-label" style="width: 150px;">Mobile Number</label>
+                            <label for="ph" class="form-label" style="width: 150px;">Mobile Number:</label>
                             <input type="tel" name="PhNo" id="ph" class="form-control" style="width: 300px;">
                         </div>
                         
                         <div class="mb-4 d-flex justify-content-start align-items-center">
-                            <label for="pm" class="form-label" style="width: 200px;">Payment mode</label>
-                            <select name="PaymentMode" id="pm" class="form-control" style="width: 250px;">
+                            <label for="pm" class="form-label" style="width: 200px;">Payment mode:</label>
+                            <select name="PaymentMode" id="pm" class="form-control" style="width: 250px;" onChange="changePaymentMode(e)">
                                 <option value="UPI">UPI</option>
-                                <option value="COD">COD</option>
+                                <option value="COD">COD (Cash on Delivery)</option>
                             </select>
+                        </div>
+
+                        <div class='d-flex justify-content-center' >
+                            <img src="{% static 'QR.jpg' %}" id='showQR' alt='qrcode' style='width: 200px; height: 200px;'>
                         </div>
     
                         <div class="mb-4 d-flex justify-content-start align-items-center">
-                            <label for="pin" class="form-label" style="width: 150px;">Pin Code</label>
+                            <label for="pin" class="form-label" style="width: 150px;">Pin Code:</label>
                             <input type="number" maxlength="1000" minlength="500" name="PinCode" id="pin" class="form-control" style="width: 300px;">
                         </div>
     
                         <div class="mb-4 d-flex justify-content-start align-items-center">
-                            <label for="ad" class="form-label" style="width: 150px;">Address</label>
-                            <textarea type="text" name="Address" id="ad" class="form-control" cols="30" rows="6" style="width: 300px;">
+                            <label for="ad" class="form-label" style="width: 150px;">Address:</label>
+                            <textarea type="text" name="Address" id="ad" class="form-control"  rows="6" style="width: 300px;">
                             </textarea>
                         </div>
                     </div>
@@ -259,5 +263,13 @@
         
 
 <script src="{% static 'cartit.js' %}"></script>
+<script>
+    function changePaymentMode(e){
+        const mode = document.getElementById("pm").value;
+        const showQR = document.getElementById("showQR");
+
+        showQR.style.display = mode == "UPI" ? "block" : "none";
+    }
+</script>
 
 {% endblock body %}
