@@ -283,6 +283,8 @@ def CusLoginView(request):
             if user:
                 login(request, user)
                 
+                request.session["otp_email"] = user.email
+
                 send_mail(subject=subject, message=mesg, from_email=settings.EMAIL_HOST_USER, recipient_list=[user.email])
                 data = Trends.objects.all()
 
