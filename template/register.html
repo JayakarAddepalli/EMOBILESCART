@@ -37,32 +37,46 @@
 {% endblock head %}
 
 {% block body %}
-<div class="reg">
+<div class="reg mt-5">
     <form action="" method="post" enctype="multipart/form-data" class="registerform mx-auto">
         {% csrf_token %}
         <h1 class="mb-4">Register</h1>
-        {% if messages %}
-            {% for message in messages %}
-            <div class="alert alert-danger">
+        {% if message %}
+            <div class="alert alert-success">
                 {{message}}
             </div>
-            {% endfor %}
+        {% elif error %}
+            <div class="alert alert-danger">
+                {{error}}
+            </div>
         {% endif %}
         <div class="mb-3">
             <label for="un" class="form-label">User name</label>
-            <input type="text" name="username" id="un" class="form-control">
+            <input type="text" name="username" id="un" class="form-control" value="{{username}}">
         </div>
         <div class="mb-3">
             <label for="fn" class="form-label">First name</label>
-            <input type="text" name="first_name" id="fn" class="form-control">
+            <input type="text" name="first_name" id="fn" class="form-control" value="{{firstname}}">
         </div>
         <div class="mb-3">
             <label for="ln" class="form-label">Last name</label>
-            <input type="text" name="last_name" id="ln" class="form-control">
+            <input type="text" name="last_name" id="ln" class="form-control" value="{{lastname}}">
         </div>
         <div class="mb-3">
             <label for="em" class="form-label">Email</label>
-            <input type="email" name="email" id="em" class="form-control">
+            <div class='d-flex justify-content-between'>
+                <input type="email" name="email" id="em" class="form-control w-75" value="{{email}}">
+                <button type="submit" name="send_otp" class='btn btn-outline-success w-auto'>Send OTP</button>
+            </div>
+            {% if otp_sent %}
+            <div class="mb-3">
+                <label for="otpInput" class="form-label">Enter OTP</label>
+                <div class='d-flex justify-content-between'>
+                    <input type='number' name='emailOTP' id="otpInput" class='form-control w-75' value={{entered_otp}} placeholder='Enter OTP'>
+                    <button type="submit" name="verify_otp" class='btn btn-outline-info w-auto' >Verify</button>
+                </div>
+            </div>
+            {% endif %}
         </div>
         <div class="mb-3">
             <label for="ps" class="form-label">Password</label>

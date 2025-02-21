@@ -20,7 +20,7 @@ window.addEventListener('scroll',()=>{
 
 let useranchorlink = document.getElementById('useranchorlink');
 
-    if(location.href == 'https://jayakara.pythonanywhere.com/APP/user/' ){
+    if(location.href == 'https://jayakar.pythonanywhere.com/APP/user/' ){
         useranchorlink.style.color = 'blue';
     }
     else{
@@ -35,14 +35,15 @@ let useranchorlink = document.getElementById('useranchorlink');
 let useranchor = document.getElementById('useranchor');
 
 customer.addEventListener('click',()=>{
-    location.href = 'http://127.0.0.1:8000/APP/login/'
+    location.href = 'http://jayakar.pythonanywhere.com/APP/login/'
 })
 
 admin.addEventListener('click',()=>{
-    location.href = 'http://127.0.0.1:8000/admin/'
+    location.href = 'http://jayakar.pythonanywhere.com/admin/'
+    console.log(location.href);
 });
 
-if((window.location.href == 'https://jayakara.pythonanywhere.com/APP/user/') || (window.location.href == 'http://127.0.0.1:8000/APP/register/') || (window.location.href == 'http://127.0.0.1:8000/APP/login/')){
+if((window.location.href == 'https://jayakar.pythonanywhere.com/APP/user/') || (window.location.href == 'http://jayakar.pythonanywhere.com/APP/register/') || (window.location.href == 'https://jayakar.pythonanywhere.com/APP/login/')){
     useranchor.style.color = '#1D63FF';
 }
 
