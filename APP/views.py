@@ -12,6 +12,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.mail import BadHeaderError, send_mail
 import random
 from django.contrib.auth.hashers import check_password #to check the decrypted password with the newpassword
+import requests
 
 
 #check_password----> to get the decrypted password to check it
@@ -402,7 +403,34 @@ def viewcart(request):
 
             paymentMode = request.POST['PaymentMode']
             
-            if len(mobile) == 10 and len(pincode) == 6:    
+            if len(mobile) == 10 and len(pincode) == 6:
+
+                apiKey = "a9e82866c40974c297c09a6edb4b22a7"
+
+                apiURL = f'http://apilayer.net/api/validate?access_key={apiKey}&number={mobile}&country_code=IN&format=1'
+
+                try:
+                    response = requests.get(apiURL)
+                    data = response.json()
+                    print(data)
+                    if data['valid'] == True:
+                        pass
+                    else:
+                        return render(request, 'cart.html', {'error': 'Invalid Mobile No!', 'originalUserEmail': originalUserEmail})
+                except requests.exceptions.RequestException:
+                    return False
+
+                try:
+                    response = requests.get(f'https://api.postalpincode.in/pincode/{pincode}')
+                    data = response.json()
+                    print(data)
+                    if data[0]['Status'] == 'Success':
+                        pass
+                    else:
+                        return render(request, 'cart.html', {'error': 'Invalid Pin!', 'originalUserEmail': originalUserEmail})
+                except requests.exceptions.RequestException:
+                    return False
+
                 
                 applecartdata = CartItem.objects.all()
                 onepluscartdata = OneplusCartItem.objects.all()
@@ -442,8 +470,9 @@ def viewcart(request):
                 readmi_res = filter((lambda i :i if len(i)!=0 else ''), readmimes)
                 samsung_res = filter((lambda i :i if len(i)!=0 else ''), samsungmess)
 
-                mess = ''.join(list(apples_res)) + '' + ''.join(list(oneplus_res)) + '' + ''.join(list(realme_res)) + '' + ''.join(list(readmi_res)) + '' + ''.join(list(samsung_res)) + '\n Total ammount: ' + str(totalprize) + '-/Rs'
-                if mess:
+                if totalprize > 0:
+
+                    mess = ''.join(list(apples_res)) + '' + ''.join(list(oneplus_res)) + '' + ''.join(list(realme_res)) + '' + ''.join(list(readmi_res)) + '' + ''.join(list(samsung_res)) + '\n Total ammount: ' + str(totalprize) + '-/Rs'
 
                     send_mail(subject=subject, message=mess, from_email=settings.EMAIL_HOST_USER, recipient_list=[user[0].email])
                     
@@ -456,7 +485,7 @@ def viewcart(request):
                 else:
                     messages.error(request, 'Your cart is empty!')
             else:
-                messages.error(request, 'Invaild Mobile No.. or Pincode!')
+                messages.error(request, 'Please check the mobile no and pincode!')
 
         else:
             messages.error(request, 'The email is not registered!')        

@@ -208,13 +208,19 @@
                 </div>
                 {% endfor %}
 
+                {% if error %}
+                <div class="alert alert-danger">
+                    {{error}}
+                </div>
+                {% endif %}
+
                 <form action="" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
 
                     <div class="card card-body h-75 overflow-scroll">
                         <div class="mb-4 d-flex justify-content-start align-items-center">
                             <label for="fn" class="form-label" style="width: 150px;">Full Name:</label>
-                            <input type="text" name="FullName" id="fn" class="form-control" style="width: 300px;">
+                            <input type="text" name="FullName" id="fn" class="form-control" style="width: 300px;" required>
                         </div>
         
                         <div class="mb-4 d-flex justify-content-start align-items-center">
@@ -224,7 +230,8 @@
     
                         <div class="mb-4 d-flex justify-content-start align-items-center">
                             <label for="ph" class="form-label" style="width: 150px;">Mobile Number:</label>
-                            <input type="tel" name="PhNo" id="ph" class="form-control" style="width: 300px;">
+                            <input type="text" id="prefix" value="+91" readonly style="width: 40px; border: none; background: transparent;" disabled>
+                            <input type="tel" name="PhNo" id="ph" class="form-control" style="width: 260px;" pattern="[0-9]{10}" required maxlength="10" onChange="validatePhone(event)">
                         </div>
                         
                         <div class="mb-4 d-flex justify-content-start align-items-center">
@@ -236,18 +243,17 @@
                         </div>
 
                         <div class='d-flex justify-content-center' >
-                            <img src="{% static 'QR.jpg' %}" id='showQR' alt='qrcode' style='width: 200px; height: 200px;'>
+                            <img src="{% static 'QR.jpg' %}" id='showQR' alt='qrcode' style='width: 210px; height: 200px;'>
                         </div>
     
                         <div class="mb-4 d-flex justify-content-start align-items-center">
                             <label for="pin" class="form-label" style="width: 150px;">Pin Code:</label>
-                            <input type="number" maxlength="1000" minlength="500" name="PinCode" id="pin" class="form-control" style="width: 300px;">
+                            <input type="tel" maxlength="6" pattern="[0-9]{6}" name="PinCode" id="pin" class="form-control" style="width: 300px;" onChange="validatePin(event)">
                         </div>
     
                         <div class="mb-4 d-flex justify-content-start align-items-center">
                             <label for="ad" class="form-label" style="width: 150px;">Address:</label>
-                            <textarea type="text" name="Address" id="ad" class="form-control"  rows="6" style="width: 300px;">
-                            </textarea>
+                            <textarea name="Address" id="ad" class="form-control"  rows="6" style="width: 300px;" required></textarea>
                         </div>
                     </div>
                     
@@ -269,6 +275,53 @@
         const showQR = document.getElementById("showQR");
 
         showQR.style.display = mode == "UPI" ? "block" : "none";
+    }
+
+    document.getElementById("ad").addEventListener("input", function() {
+        this.value = this.value.trim();
+    });
+
+    function validatePhone(event){
+        const apiKey = "a9e82866c40974c297c09a6edb4b22a7";
+        const usernumber = event.target.value;
+        const apiURL = `http://apilayer.net/api/validate?access_key=${apiKey}&number=${usernumber}&country_code=IN&format=1`;
+
+        fetch(apiURL)
+        .then(response => response.json())
+        .then(data => {
+            if(data.valid){
+                event.target.style.border = "1px solid rgb(37, 255, 29)";
+            }
+            else{
+                event.target.style.border = "1px solid red";
+            }
+        })
+        .catch(error => {
+            console.log(error);
+        })
+
+
+    }
+
+    function validatePin(event){
+        const pin = event.target.value
+
+        fetch(`https://api.postalpincode.in/pincode/${pin}`)
+        .then(response => response.json())
+        .then(data => {
+            if(data[0].Status == "Success"){
+                console.log("Valid pin Code")
+                event.target.style.border = "1px solid rgb(37, 255, 29)";
+            }
+            else{
+                console.log("Invalid pin code")
+                event.target.style.border = "1px solid red";
+            }
+        })
+        .catch(error => {
+            console.log(error);
+        })
+
     }
 </script>
 
